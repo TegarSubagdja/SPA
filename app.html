@@ -1,0 +1,1946 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT Surya Sarana Dinamika - Smart Building Intelligence</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@200;300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #00d9ff;
+            --color-secondary: #ff006e;
+            --color-accent: #ffbe0b;
+            --color-dark-bg: #0a0e27;
+            --color-dark-card: rgba(15, 20, 50, 0.8);
+            --color-glass: rgba(255, 255, 255, 0.05);
+            --color-glass-border: rgba(255, 255, 255, 0.1);
+            --color-text-primary: #ffffff;
+            --color-text-secondary: rgba(255, 255, 255, 0.7);
+            --color-text-tertiary: rgba(255, 255, 255, 0.5);
+            --blur: 20px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            background: var(--color-dark-bg);
+            color: var(--color-text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Aurora Background Animation */
+        .aurora-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .aurora-1 {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(ellipse at 30% 50%, rgba(0, 217, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -10%;
+            left: -5%;
+            animation: aurora-float 15s ease-in-out infinite;
+            filter: blur(60px);
+        }
+
+        .aurora-2 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(ellipse at 70% 40%, rgba(255, 0, 110, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            top: 5%;
+            right: 5%;
+            animation: aurora-float 18s ease-in-out infinite reverse;
+            filter: blur(50px);
+        }
+
+        .aurora-3 {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(ellipse at 50% 60%, rgba(255, 190, 11, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -10%;
+            right: 10%;
+            animation: aurora-float 20s ease-in-out infinite;
+            filter: blur(80px);
+        }
+
+        .aurora-4 {
+            position: absolute;
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(ellipse at 20% 70%, rgba(0, 217, 255, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: 5%;
+            left: 10%;
+            animation: aurora-float 17s ease-in-out infinite reverse;
+            filter: blur(70px);
+        }
+
+        @keyframes aurora-float {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            25% {
+                transform: translate(30px, -30px);
+            }
+
+            50% {
+                transform: translate(-20px, 20px);
+            }
+
+            75% {
+                transform: translate(20px, 30px);
+            }
+        }
+
+        /* Grid Background */
+        .grid-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(0, 217, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 217, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        /* Content Container */
+        .content {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: linear-gradient(180deg, rgba(10, 14, 39, 0.95) 0%, rgba(10, 14, 39, 0.7) 100%);
+            border-bottom: 1px solid var(--color-glass-border);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.3rem;
+            background: linear-gradient(120deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(120deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+        }
+
+        .nav-links {
+            display: none;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-btn {
+            padding: 0.75rem 1.75rem;
+            background: linear-gradient(120deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            font-size: 0.95rem;
+            box-shadow: 0 8px 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-btn:hover::before {
+            left: 100%;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 217, 255, 0.4);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--color-primary);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, rgba(10, 14, 39, 0.98) 0%, rgba(10, 14, 39, 0.9) 100%);
+            backdrop-filter: blur(20px);
+            flex-direction: column;
+            padding: 2rem;
+            gap: 1.5rem;
+            border-bottom: 1px solid var(--color-glass-border);
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 1000px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--color-glass);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 50px;
+            backdrop-filter: blur(var(--blur));
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(120deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+
+            0%,
+            100% {
+                filter: hue-rotate(0deg);
+            }
+
+            50% {
+                filter: hue-rotate(20deg);
+            }
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(120deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            color: white;
+            box-shadow: 0 8px 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 50px rgba(0, 217, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--color-glass);
+            color: var(--color-text-primary);
+            border: 1.5px solid var(--color-glass-border);
+            backdrop-filter: blur(var(--blur));
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--color-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(0, 217, 255, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: var(--color-glass);
+            border: 1px solid var(--color-glass-border);
+            backdrop-filter: blur(var(--blur));
+            border-radius: 20px;
+            padding: 2rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.3), transparent);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 217, 255, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 217, 255, 0.15);
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .about-text p {
+            color: var(--color-text-secondary);
+            margin-bottom: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .value-item {
+            background: linear-gradient(120deg, rgba(0, 217, 255, 0.05), rgba(255, 190, 11, 0.05));
+            border: 1px solid var(--color-glass-border);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .value-item:hover {
+            border-color: var(--color-primary);
+            background: linear-gradient(120deg, rgba(0, 217, 255, 0.1), rgba(255, 190, 11, 0.1));
+            transform: translateY(-5px);
+        }
+
+        .value-icon {
+            font-size: 2.2rem;
+            margin-bottom: 1.2rem;
+            display: inline-block;
+            background: linear-gradient(120deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 8px rgba(0, 217, 255, 0.3));
+        }
+
+        .value-item h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .value-item p {
+            font-size: 0.95rem;
+            color: var(--color-text-tertiary);
+        }
+
+        /* Solutions Grid */
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .solution-card {
+            height: 100%;
+        }
+
+        .solution-card-content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .solution-header {
+            height: 180px;
+            background: linear-gradient(120deg, rgba(0, 217, 255, 0.1), rgba(255, 190, 11, 0.1));
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 217, 255, 0.2) 0%, transparent 70%);
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        .solution-icon {
+            font-size: 3.5rem;
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(120deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .solution-body {
+            padding: 2rem;
+            background: var(--color-glass);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 0 0 15px 15px;
+            backdrop-filter: blur(var(--blur));
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .solution-body h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--color-text-primary);
+        }
+
+        .solution-body p {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            flex: 1;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .solution-link {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .solution-link:hover {
+            gap: 1rem;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2.5rem 2rem;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            background: linear-gradient(120deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .feature-item h3 {
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .feature-item p {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-item {
+            background: var(--color-glass);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(var(--blur));
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .service-item:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-8px);
+            background: linear-gradient(120deg, rgba(0, 217, 255, 0.08), rgba(255, 190, 11, 0.08));
+            box-shadow: 0 20px 60px rgba(0, 217, 255, 0.1);
+        }
+
+        .service-item:hover::after {
+            left: 100%;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.2rem;
+            display: inline-block;
+            background: linear-gradient(120deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .service-item h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .service-item ul {
+            list-style: none;
+            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+        }
+
+        .service-item li::before {
+            content: '→ ';
+            color: var(--color-primary);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Products Section */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--color-glass);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(var(--blur));
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+        }
+
+        .product-card:hover {
+            border-color: var(--color-primary));
+            border-left-color: var(--color-primary);
+            background: linear-gradient(120deg, rgba(0, 217, 255, 0.08), rgba(255, 190, 11, 0.08));
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 217, 255, 0.1);
+        }
+
+        .product-brand {
+            color: var(--color-primary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .product-card p {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+
+        /* CTA Section */
+        .cta-container {
+            background: linear-gradient(120deg,
+                    rgba(0, 217, 255, 0.1),
+                    rgba(255, 190, 11, 0.1),
+                    rgba(255, 190, 11, 0.08));
+            border: 1px solid var(--color-glass-border);
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            text-align: center;
+            backdrop-filter: blur(var(--blur));
+            position: relative;
+            overflow: hidden;
+            margin: 4rem 0;
+        }
+
+        .cta-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 217, 255, 0.1) 0%, transparent 70%);
+            animation: orbit 10s linear infinite;
+        }
+
+        @keyframes orbit {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .cta-container h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-container p {
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--color-text-primary);
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: var(--color-glass);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 12px;
+            padding: 1rem;
+            color: var(--color-text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+            backdrop-filter: blur(var(--blur));
+            transition: var(--transition);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--color-text-tertiary);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            background: rgba(0, 217, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .contact-item-icon {
+            font-size: 1.8rem;
+            color: var(--color-primary);
+            min-width: 35px;
+            text-align: center;
+        }
+
+        .contact-item-text h3 {
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+            color: var(--color-text-primary);
+        }
+
+        .contact-item-text p {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(180deg,
+                    rgba(10, 14, 39, 0.5) 0%,
+                    rgba(10, 14, 39, 0.8) 100%);
+            border-top: 1px solid var(--color-glass-border);
+            padding: 4rem 2rem 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1600px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            background: linear-gradient(120deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.1rem;
+        }
+
+        .footer-section a {
+            display: block;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: var(--color-primary);
+            padding-left: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            width: 45px;
+            height: 45px;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-glass);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 50%;
+            color: var(--color-primary);
+            transition: var(--transition);
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .social-links a:hover {
+            border-color: var(--color-primary);
+            background: rgba(0, 217, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid var(--color-glass-border);
+            padding-top: 2rem;
+            color: var(--color-text-tertiary);
+            font-size: 0.95rem;
+        }
+
+        .footer-bottom p {
+            margin: 0.5rem 0;
+        }
+
+        .footer-bottom a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--color-secondary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .mobile-menu {
+                width: 100%;
+            }
+
+            .hero {
+                padding: 6rem 1.5rem 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .nav-links {
+                display: flex;
+            }
+
+            .hamburger {
+                display: none;
+            }
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Loading Animation */
+        @keyframes shimmer {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--color-dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--color-primary), var(--color-secondary));
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--color-secondary), var(--color-primary));
+        }
+
+        /* Selection */
+        ::selection {
+            background: var(--color-primary);
+            color: var(--color-dark-bg);
+        }
+
+        /* Link Color */
+        a {
+            color: var(--color-primary);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Aurora Background -->
+    <div class="aurora-bg">
+        <div class="grid-bg"></div>
+        <div class="aurora-1"></div>
+        <div class="aurora-2"></div>
+        <div class="aurora-3"></div>
+        <div class="aurora-4"></div>
+    </div>
+
+    <div class="content">
+        <!-- Header -->
+        <header>
+            <nav>
+                <a href="#" class="logo">
+                    <div class="logo-icon">SSD</div>
+                    <span>Surya Sarana Dinamika</span>
+                </a>
+
+                <ul class="nav-links">
+                    <li><a href="#beranda">Beranda</a></li>
+                    <li><a href="#tentang">Tentang</a></li>
+                    <li><a href="#solusi">Solusi</a></li>
+                    <li><a href="#layanan">Layanan</a></li>
+                    <li><a href="#kontak">Kontak</a></li>
+                </ul>
+
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button class="cta-btn"
+                        onclick="document.getElementById('kontak').scrollIntoView({behavior:'smooth'})">Hubungi
+                        Kami</button>
+                    <div class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="#beranda">Beranda</a>
+                <a href="#tentang">Tentang</a>
+                <a href="#solusi">Solusi</a>
+                <a href="#layanan">Layanan</a>
+                <a href="#kontak">Kontak</a>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero" id="beranda">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-sparkles"></i> Smart Building Intelligence
+                </div>
+                <h1>Gedung Cerdas, <span class="gradient-text">Efisiensi Maksimal</span></h1>
+                <p>Revolusionalisasi operasi gedung Anda dengan Building Management System terdepan. Real-time
+                    monitoring, otomasi cerdas, dan penghematan energi hingga 30% dalam satu platform terintegrasi.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary"
+                        onclick="document.getElementById('kontak').scrollIntoView({behavior:'smooth'})">
+                        <i class="fas fa-arrow-right"></i> Minta Demo Sekarang
+                    </button>
+                    <button class="btn btn-secondary"
+                        onclick="document.getElementById('solusi').scrollIntoView({behavior:'smooth'})">
+                        <i class="fas fa-play"></i> Lihat Solusi Kami
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="tentang">
+            <div class="section-header">
+                <span class="section-label">Tentang Kami</span>
+                <h2 class="section-title">PT Surya Sarana Dinamika</h2>
+                <p class="section-subtitle">Pelopor solusi Building Management Systems di Indonesia dengan pengalaman
+                    lebih dari 20 tahun</p>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>Memimpin Transformasi Digital Gedung</h2>
+                    <p>Kami adalah perusahaan terkemuka dengan keahlian mendalam dalam Building Management Systems (BMS)
+                        di Indonesia. Dengan pengalaman lebih dari dua dekade di bidang otomasi, robotika, dan IoT, kami
+                        mengembangkan solusi canggih yang mengintegrasikan, mengotomasi, dan mengoptimalkan operasi
+                        gedung.</p>
+                    <p>Berkomitmen merevolusi cara gedung beroperasi dengan menyediakan solusi BMS yang inovatif dan
+                        andal. Kami menciptakan gedung yang lebih cerdas, hijau, dan efisien yang memenuhi kebutuhan
+                        klien yang terus berkembang.</p>
+                </div>
+
+                <div class="values-grid">
+                    <div class="value-item">
+                        <div class="value-icon"><i class="fa-solid fa-handshake"></i></div>
+                        <h3>Integritas</h3>
+                        <p>Fondasi kepercayaan dengan kejujuran, transparansi, dan akuntabilitas dalam setiap interaksi.
+                        </p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon"><i class="fa-solid fa-users-gear"></i></div>
+                        <h3>Respect</h3>
+                        <p>Mengakui nilai setiap individu dengan kesopanan dan pertimbangan dalam melayani stakeholder.
+                        </p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
+                        <h3>Responsive</h3>
+                        <p>Bereaksi cepat dan positif terhadap kebutuhan klien dengan komitmen melampaui ekspektasi.</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon"><i class="fa-solid fa-medal"></i></div>
+                        <h3>Excellent</h3>
+                        <p>Berusaha mencapai standar tertinggi dengan komitmen perbaikan berkelanjutan dan performa luar
+                            biasa.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What is BMS -->
+        <section>
+            <div class="section-header">
+                <span class="section-label">Teknologi</span>
+                <h2 class="section-title">Apa itu Building Management System?</h2>
+                <p class="section-subtitle">Sistem terintegrasi untuk kontrol, monitoring, dan optimasi seluruh sistem
+                    gedung</p>
+            </div>
+
+            <div class="glass-card" style="margin-bottom: 3rem;">
+                <p style="color: var(--color-text-secondary); line-height: 1.8; font-size: 1.05rem;">Building Management
+                    System (BMS) adalah sistem terintegrasi yang dirancang untuk mengontrol dan memantau berbagai sistem
+                    mekanis dan listrik dalam sebuah gedung. Sistem ini membantu mengoptimalkan efisiensi operasional
+                    gedung, meningkatkan kenyamanan penghuni, memastikan keselamatan, dan mengurangi konsumsi energi
+                    hingga 30%.</p>
+            </div>
+
+            <h3 style="font-size: 1.8rem; margin-bottom: 2.5rem; text-align: center;">Komponen Utama BMS</h3>
+
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-microchip"></i></div>
+                    <h3>Sensor</h3>
+                    <p>Perangkat yang mengukur suhu, kelembapan, okupansi, cahaya, kualitas udara, dan tekanan</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-sliders"></i></div>
+                    <h3>Kontroler</h3>
+                    <p>Hardware dan software yang memproses data sensor dengan protokol komunikasi multivarian</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-gears"></i></div>
+                    <h3>Aktuator</h3>
+                    <p>Perangkat yang melaksanakan perintah dari kontroler untuk menjalankan aksi sistem</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-desktop"></i></div>
+                    <h3>User Interface</h3>
+                    <p>Aplikasi software untuk monitoring kinerja dengan dashboard, laporan, dan alarm</p>
+                </div>
+            </div>
+
+            <h3 style="font-size: 1.8rem; margin: 4rem 0 2.5rem; text-align: center;">Manfaat BMS</h3>
+
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-building-shield"></i></div>
+                    <h3>Keandalan Tinggi</h3>
+                    <p>Peningkatan keandalan peralatan melalui monitoring proaktif</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-money-bill-trend-up"></i></div>
+                    <h3>Biaya Operasional</h3>
+                    <p>Penurangan signifikan dalam biaya operasional gedung</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-city"></i></div>
+                    <h3>Manajemen Optimal</h3>
+                    <p>Pengelolaan gedung yang lebih efisien dan terpusat</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-user-tie"></i></div>
+                    <h3>Produktivitas</h3>
+                    <p>Peningkatan produktivitas staf melalui lingkungan kerja optimal</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>Perlindungan Aset</h3>
+                    <p>Perlindungan peralatan dan keselamatan penghuni</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3>Efisiensi Energi</h3>
+                    <p>Penghematan energi hingga 30% melalui otomasi cerdas</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solutions Section -->
+        <section id="solusi">
+            <div class="section-header">
+                <span class="section-label">Solusi Kami</span>
+                <h2 class="section-title">Paket Solusi BMS Terintegrasi</h2>
+                <p class="section-subtitle">Solusi komprehensif yang dirancang khusus untuk kebutuhan gedung modern</p>
+            </div>
+
+            <div class="solutions-grid">
+                <div class="solution-card glass-card">
+                    <div class="solution-card-content">
+                        <div class="solution-header">
+                            <div class="solution-icon"><i class="fa-solid fa-building-user"></i></div>
+                        </div>
+                        <div class="solution-body">
+                            <h3>Smart Building Package</h3>
+                            <p>Solusi komprehensif yang menggabungkan berbagai sistem otomasi dan monitoring dalam satu
+                                platform terintegrasi untuk efisiensi operasional, kenyamanan penghuni, dan keamanan
+                                gedung.</p>
+                            <a href="#" class="solution-link"><i class="fas fa-arrow-right"></i> Pelajari Lebih
+                                Lanjut</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="solution-card glass-card">
+                    <div class="solution-card-content">
+                        <div class="solution-header">
+                            <div class="solution-icon"><i class="fa-solid fa-battery-full"></i></div>
+                        </div>
+                        <div class="solution-body">
+                            <h3>Energy Monitoring System</h3>
+                            <p>Solusi pemantauan energi real-time untuk transparansi konsumsi daya. Mencatat data
+                                listrik dari berbagai titik dan mengidentifikasi potensi pemborosan energi dengan
+                                insight akurat.</p>
+                            <a href="#" class="solution-link"><i class="fas fa-arrow-right"></i> Pelajari Lebih
+                                Lanjut</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="solution-card glass-card">
+                    <div class="solution-card-content">
+                        <div class="solution-header">
+                            <div class="solution-icon"><i class="fa-solid fa-wind"></i></div>
+                        </div>
+                        <div class="solution-body">
+                            <h3>HVAC Automation System</h3>
+                            <p>Sistem otomasi HVAC cerdas yang mengoptimalkan pendinginan dan ventilasi. HVAC
+                                mengkonsumsi 50% energi gedung, sistem kami menurunkan hingga 30% dengan kenyamanan
+                                maksimal.</p>
+                            <a href="#" class="solution-link"><i class="fas fa-arrow-right"></i> Pelajari Lebih
+                                Lanjut</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="solution-card glass-card">
+                    <div class="solution-card-content">
+                        <div class="solution-header">
+                            <div class="solution-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                        </div>
+                        <div class="solution-body">
+                            <h3>Lighting Control & Monitoring</h3>
+                            <p>Sistem kontrol pencahayaan otomatis berdasarkan occupancy, jadwal, dan cahaya alami.
+                                Meningkatkan efisiensi energi dan kenyamanan penghuni dengan responsif.</p>
+                            <a href="#" class="solution-link"><i class="fas fa-arrow-right"></i> Pelajari Lebih
+                                Lanjut</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="solution-card glass-card">
+                    <div class="solution-card-content">
+                        <div class="solution-header">
+                            <div class="solution-icon"><i class="fa-solid fa-lock"></i></div>
+                        </div>
+                        <div class="solution-body">
+                            <h3>Security & Access Control</h3>
+                            <p>Sistem keamanan terintegrasi dengan CCTV, access control, dan surveillance canggih.
+                                Memastikan keselamatan dan keamanan optimal untuk semua pengguna gedung.</p>
+                            <a href="#" class="solution-link"><i class="fas fa-arrow-right"></i> Pelajari Lebih
+                                Lanjut</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="solution-card glass-card">
+                    <div class="solution-card-content">
+                        <div class="solution-header">
+                            <div class="solution-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                        </div>
+                        <div class="solution-body">
+                            <h3>Predictive Maintenance System</h3>
+                            <p>Sistem pemeliharaan prediktif berbasis IoT yang mengidentifikasi potensi kerusakan
+                                sebelum terjadi. Mengurangi downtime dan mengoptimalkan biaya perawatan jangka panjang.
+                            </p>
+                            <a href="#" class="solution-link"><i class="fas fa-arrow-right"></i> Pelajari Lebih
+                                Lanjut</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section>
+            <div class="section-header">
+                <span class="section-label">Keunggulan Kami</span>
+                <h2 class="section-title">Mengapa Memilih SSD?</h2>
+                <p class="section-subtitle">Partner terpercaya untuk transformasi digital gedung Anda</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-item">
+                    <div class="service-icon"><i class="fa-solid fa-bullseye"></i></div>
+                    <h3>Expertise</h3>
+                    <ul>
+                        <li>20+ tahun pengalaman industri BMS</li>
+                        <li>Tim ahli untuk proyek kompleks</li>
+                        <li>Sertifikasi internasional</li>
+                    </ul>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
+                    <h3>Customized Solutions</h3>
+                    <ul>
+                        <li>Solusi disesuaikan kebutuhan unik</li>
+                        <li>Pendekatan konsultatif</li>
+                        <li>Implementasi fleksibel</li>
+                    </ul>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+                    <h3>Proven Track Record</h3>
+                    <ul>
+                        <li>Portfolio proyek sukses</li>
+                        <li>Kepuasan klien tinggi</li>
+                        <li>References industry leaders</li>
+                    </ul>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon"><i class="fa-solid fa-headset"></i></div>
+                    <h3>Support & Service</h3>
+                    <ul>
+                        <li>Dukungan 24/7 teknis</li>
+                        <li>Maintenance berkala</li>
+                        <li>Training operasional</li>
+                    </ul>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon"><i class="fa-solid fa-leaf"></i></div>
+                    <h3>Sustainability Focus</h3>
+                    <ul>
+                        <li>Solusi ramah lingkungan</li>
+                        <li>Program hemat energi</li>
+                        <li>Sertifikasi green building</li>
+                    </ul>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon"><i class="fa-solid fa-industry"></i></div>
+                    <h3>Industry Partnership</h3>
+                    <ul>
+                        <li>Johnson Controls</li>
+                        <li>Yaskawa, Autonics</li>
+                        <li>Mitsubishi Electric</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="layanan">
+            <div class="section-header">
+                <span class="section-label">Layanan Kami</span>
+                <h2 class="section-title">Paket Layanan Komprehensif</h2>
+                <p class="section-subtitle">Dari konsultasi hingga maintenance jangka panjang</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-item">
+                    <div class="service-icon"><i class="fa-solid fa-file-signature"></i></div>
+                    <h3>Konsultasi & Desain</h3>
+                    <ul>
+                        <li>Analisis kebutuhan detail</li>
+                        <li>Desain sistem optimal</li>
+                        <li>Kalkulasi efisiensi</li>
+                    </ul>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon"><i class="fa-solid fa-tools"></i></div>
+                    <h3>Instalasi & Implementasi</h3>
+                    <ul>
+                        <li>Instalasi hardware profesional</li>
+                        <li>Integrasi subsistem lengkap</li>
+                        <li>Konfigurasi software expert</li>
+                    </ul>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon"><i class="fa-solid fa-vial-circle-check"></i></div>
+                    <h3>Testing & Commissioning</h3>
+                    <ul>
+                        <li>Pengujian sistem komprehensif</li>
+                        <li>Training operasional staff</li>
+                        <li>Dokumentasi lengkap</li>
+                    </ul>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                    <h3>Maintenance & Support</h3>
+                    <ul>
+                        <li>Maintenance rutin terjadwal</li>
+                        <li>Support teknis 24/7</li>
+                        <li>Monitoring proaktif</li>
+                    </ul>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon"><i class="fa-solid fa-box-open"></i></div>
+                    <h3>Provision of Components</h3>
+                    <ul>
+                        <li>Spare parts berkualitas</li>
+                        <li>Instalasi penggantian</li>
+                        <li>Garansi komprehensif</li>
+                    </ul>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                    <h3>Monitoring & Optimization</h3>
+                    <ul>
+                        <li>Monitoring real-time</li>
+                        <li>Analisis data mendalam</li>
+                        <li>Rekomendasi optimasi</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section>
+            <div class="section-header">
+                <span class="section-label">Produk Kami</span>
+                <h2 class="section-title">Komponen BMS Premium</h2>
+                <p class="section-subtitle">Partnership dengan pabrikan terkemuka dunia untuk kualitas terbaik</p>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card glass-card">
+                    <div class="product-brand">Yaskawa</div>
+                    <h3>Inverter (VSD)</h3>
+                    <p><strong>Solusi:</strong> Mengatur kecepatan motor sesuai beban</p>
+                    <p><strong>Benefit:</strong> Hemat energi 40%, perpanjang umur motor</p>
+                </div>
+
+                <div class="product-card glass-card">
+                    <div class="product-brand">Autonics / Johnson Controls</div>
+                    <h3>Sensor Suhu & Kelembapan</h3>
+                    <p><strong>Solusi:</strong> Pemantauan real-time kondisi ruangan</p>
+                    <p><strong>Benefit:</strong> Kenyamanan optimal, efisiensi HVAC</p>
+                </div>
+
+                <div class="product-card glass-card">
+                    <div class="product-brand">ESI / SUCO / Autonics</div>
+                    <h3>Sensor Tekanan Udara & Air</h3>
+                    <p><strong>Solusi:</strong> Monitoring tekanan sistem ventilasi</p>
+                    <p><strong>Benefit:</strong> Sistem stabil, proteksi otomatis</p>
+                </div>
+
+                <div class="product-card glass-card">
+                    <div class="product-brand">Johnson Controls</div>
+                    <h3>Pressure Transmitter & Switch</h3>
+                    <p><strong>Solusi:</strong> Deteksi dini masalah tekanan</p>
+                    <p><strong>Benefit:</strong> Notifikasi cepat, cegah kerusakan</p>
+                </div>
+
+                <div class="product-card glass-card">
+                    <div class="product-brand">Johnson Controls</div>
+                    <h3>Air Flow Sensor & Switch</h3>
+                    <p><strong>Solusi:</strong> Validasi performa HVAC</p>
+                    <p><strong>Benefit:</strong> Performa optimal, deteksi gangguan</p>
+                </div>
+
+                <div class="product-card glass-card">
+                    <div class="product-brand">Mitsubishi Electric</div>
+                    <h3>Programmable Controller</h3>
+                    <p><strong>Solusi:</strong> Kontrol sentral dan integrasi sistem</p>
+                    <p><strong>Benefit:</strong> Otomasi cerdas, monitoring real-time</p>
+                </div>
+
+                <div class="product-card glass-card">
+                    <div class="product-brand">Autonics</div>
+                    <h3>Automation Products</h3>
+                    <p><strong>Solusi:</strong> Sensor, kontroler, switch otomasi</p>
+                    <p><strong>Benefit:</strong> Reliability tinggi, cost-effective</p>
+                </div>
+
+                <div class="product-card glass-card">
+                    <div class="product-brand">Weidmüller</div>
+                    <h3>Wireless & Connectivity</h3>
+                    <p><strong>Solusi:</strong> Koneksi wireless dan networking</p>
+                    <p><strong>Benefit:</strong> Instalasi fleksibel, skalabilitas</p>
+                </div>
+
+                <div class="product-card glass-card">
+                    <div class="product-brand">ESI Technology</div>
+                    <h3>Pressure Switches</h3>
+                    <p><strong>Solusi:</strong> Monitoring presisi untuk HVAC</p>
+                    <p><strong>Benefit:</strong> Akurasi tinggi, performa optimal</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <div class="cta-container">
+            <h2>Siap Transformasi Gedung Anda?</h2>
+            <p>Dapatkan konsultasi gratis dari tim ahli kami dan lihat bagaimana BMS dapat menghemat biaya operasional
+                Anda hingga 30%.</p>
+            <button class="cta-btn" onclick="document.getElementById('kontak').scrollIntoView({behavior:'smooth'})">
+                <i class="fas fa-phone"></i> Hubungi Tim Kami Sekarang
+            </button>
+        </div>
+
+        <!-- Contact Section -->
+        <section id="kontak">
+            <div class="section-header">
+                <span class="section-label">Hubungi Kami</span>
+                <h2 class="section-title">Mari Kita Bicara</h2>
+                <p class="section-subtitle">Tim kami siap membantu mewujudkan visi gedung cerdas Anda</p>
+            </div>
+
+            <div class="contact-grid">
+                <form class="contact-form" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" name="name" placeholder="Nama Anda" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="email@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Nomor Telepon</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+62 812..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subjek</label>
+                        <input type="text" id="subject" name="subject" placeholder="Tujuan Anda" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Pesan</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Ceritakan kebutuhan Anda..."
+                            required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem; font-size: 1rem;">
+                        <i class="fas fa-paper-plane"></i> Kirim Pesan
+                    </button>
+                </form>
+
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="contact-item-text">
+                            <h3>Head Office - Jakarta</h3>
+                            <p>Perdambatan Mega Sunter B-40</p>
+                            <p>Jl. Danau Sunter Selatan, Jakarta 14350</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-item-icon"><i class="fas fa-phone"></i></div>
+                        <div class="contact-item-text">
+                            <h3>Telepon</h3>
+                            <p>(+62-21) 6583 5077 - 78</p>
+                            <p>Fax: (62-21) 6583 5079 - 80</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-item-text">
+                            <h3>Email</h3>
+                            <p>sales@suryasarana.com</p>
+                            <p>customercare@suryasarana.com</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-item-icon"><i class="fas fa-clock"></i></div>
+                        <div class="contact-item-text">
+                            <h3>Jam Operasional</h3>
+                            <p>Senin - Jumat: 08:00 - 17:00</p>
+                            <p>Sabtu: 09:00 - 14:00</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-item-icon"><i class="fab fa-whatsapp"></i></div>
+                        <div class="contact-item-text">
+                            <h3>WhatsApp Chat</h3>
+                            <p><a href="https://wa.me/628771274177"
+                                    style="color: var(--color-primary); text-decoration: none;">Chat Langsung →</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-item-icon"><i class="fas fa-location-dot"></i></div>
+                        <div class="contact-item-text">
+                            <h3>Lokasi Lain</h3>
+                            <p><strong>Surabaya:</strong> Jl. Jemur Andayani 36B</p>
+                            <p><strong>Cikarang:</strong> Jl. Kenari Raya Delta Silicon 6</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>PT Surya Sarana Dinamika</h3>
+                    <p style="color: var(--color-text-secondary); margin-bottom: 1rem; font-size: 0.95rem;">Solusi
+                        terintegrasi untuk manajemen gedung yang efisien, aman, dan nyaman dengan teknologi terdepan.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Solusi</h3>
+                    <a href="#solusi">Smart Building Package</a>
+                    <a href="#solusi">Energy Monitoring System</a>
+                    <a href="#solusi">HVAC Automation</a>
+                    <a href="#solusi">Lighting Control</a>
+                    <a href="#solusi">Security System</a>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Perusahaan</h3>
+                    <a href="#tentang">Tentang Kami</a>
+                    <a href="#layanan">Layanan</a>
+                    <a href="#kontak">Kontak</a>
+                    <a href="#">Karir</a>
+                    <a href="#">Blog</a>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Dukungan</h3>
+                    <a href="#">Dokumentasi</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Tutorial</a>
+                    <a href="#">Case Study</a>
+                    <a href="#">Download</a>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Hubungi Kami</h3>
+                    <p style="color: var(--color-text-secondary); margin-bottom: 1rem; font-size: 0.95rem;">
+                        <strong>Jakarta:</strong><br>
+                        <a href="tel:+622165835077">(+62-21) 6583 5077</a>
+                    </p>
+                    <p style="color: var(--color-text-secondary); margin-bottom: 1rem; font-size: 0.95rem;">
+                        <strong>Email:</strong><br>
+                        <a href="mailto:sales@suryasarana.com">sales@suryasarana.com</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 PT Surya Sarana Dinamika. Semua hak dilindungi. Powered by Industry 4.0</p>
+                <p>
+                    <a href="#">Kebijakan Privasi</a> •
+                    <a href="#">Syarat Layanan</a> •
+                    <a href="#">Sitemap</a>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Form Submit Handler
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            const whatsappMessage = `
+Halo PT Surya Sarana Dinamika,
+
+Nama: ${name}
+Email: ${email}
+Telepon: ${phone}
+Subjek: ${subject}
+
+Pesan:
+${message}
+            `.trim();
+
+            const whatsappLink = `https://wa.me/628771274177?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappLink, '_blank');
+
+            document.querySelector('.contact-form').reset();
+        }
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.solution-card, .service-item, .feature-item, .product-card').forEach(el => {
+            el.style.opacity = '0';
+            observer.observe(el);
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.background = 'linear-gradient(180deg, rgba(10, 14, 39, 0.98) 0%, rgba(10, 14, 39, 0.85) 100%)';
+            } else {
+                header.style.background = 'linear-gradient(180deg, rgba(10, 14, 39, 0.95) 0%, rgba(10, 14, 39, 0.7) 100%)';
+            }
+        });
+    </script>
+</body>
+
+</html>
