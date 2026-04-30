@@ -11,43 +11,60 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        midnight: '#030712',
+                        midnight: '#020617',
                         navy: '#0f172a',
                         'royal-blue': '#2563eb',
                         'light-blue': '#60a5fa',
+                        'brand-accent': '#00d9ff',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         display: ['Poppins', 'sans-serif'],
                     },
+                    boxShadow: {
+                        '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
+                        'blue-glow': '0 0 20px rgba(37, 99, 235, 0.4)',
+                    }
                 }
             }
         }
     </script>
     <style>
         .glass {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
         .glass-dark {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(2, 6, 23, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         .hero-gradient {
-            background: radial-gradient(circle at 70% 30%, rgba(37, 99, 235, 0.2), transparent 50%),
-                        radial-gradient(circle at 20% 70%, rgba(37, 99, 235, 0.15), transparent 50%);
+            background: radial-gradient(circle at 70% 20%, rgba(37, 99, 235, 0.25), transparent 45%),
+                        radial-gradient(circle at 15% 80%, rgba(0, 217, 255, 0.15), transparent 45%);
+        }
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .card-hover {
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
         .card-hover:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.15);
         }
         .nav-link-hover {
             position: relative;
@@ -55,39 +72,63 @@
         .nav-link-hover::after {
             content: '';
             position: absolute;
-            bottom: -4px;
-            left: 0;
+            bottom: -6px;
+            left: 50%;
             width: 0;
             height: 2px;
-            background: #2563eb;
-            transition: width 0.3s ease;
+            background: linear-gradient(90deg, #2563eb, #00d9ff);
+            transition: all 0.4s ease;
+            transform: translateX(-50%);
         }
         .nav-link-hover:hover::after {
             width: 100%;
         }
+        .shimmer {
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            filter: blur(60px);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
     </style>
 </head>
 
 <body class="font-sans bg-white text-navy overflow-x-hidden antialiased">
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 transition-all duration-300 glass-dark">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="flex items-center space-x-3">
-                <div class="w-10 h-10 bg-royal-blue rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-600/30">SSD</div>
-                <span class="text-white font-display font-bold text-2xl tracking-tight">SSD</span>
+    <nav class="fixed top-0 w-full z-50 transition-all duration-500 glass-dark py-4" id="mainNav">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-11 h-11 bg-gradient-to-tr from-royal-blue to-brand-accent rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-blue-600/30 group-hover:rotate-6 transition-transform">SSD</div>
+                <span class="text-white font-display font-extrabold text-2xl tracking-tight uppercase">SSD <span class="text-brand-accent">BMS</span></span>
             </a>
             
             <div class="hidden lg:flex items-center space-x-10">
-                <a href="#home" class="text-gray-300 hover:text-white transition-colors text-sm font-semibold tracking-wide nav-link-hover uppercase">Beranda</a>
-                <a href="#tentang" class="text-gray-300 hover:text-white transition-colors text-sm font-semibold tracking-wide nav-link-hover uppercase">Tentang</a>
-                <a href="#solusi" class="text-gray-300 hover:text-white transition-colors text-sm font-semibold tracking-wide nav-link-hover uppercase">Solusi</a>
-                <a href="#layanan" class="text-gray-300 hover:text-white transition-colors text-sm font-semibold tracking-wide nav-link-hover uppercase">Layanan</a>
-                <a href="#produk" class="text-gray-300 hover:text-white transition-colors text-sm font-semibold tracking-wide nav-link-hover uppercase">Produk</a>
-                <a href="#kontak" class="text-gray-300 hover:text-white transition-colors text-sm font-semibold tracking-wide nav-link-hover uppercase">Kontak</a>
+                <a href="#home" class="text-gray-300 hover:text-white transition-all text-xs font-black tracking-[0.2em] nav-link-hover uppercase">Beranda</a>
+                <a href="#tentang" class="text-gray-300 hover:text-white transition-all text-xs font-black tracking-[0.2em] nav-link-hover uppercase">Tentang</a>
+                <a href="#solusi" class="text-gray-300 hover:text-white transition-all text-xs font-black tracking-[0.2em] nav-link-hover uppercase">Solusi</a>
+                <a href="#layanan" class="text-gray-300 hover:text-white transition-all text-xs font-black tracking-[0.2em] nav-link-hover uppercase">Layanan</a>
+                <a href="#produk" class="text-gray-300 hover:text-white transition-all text-xs font-black tracking-[0.2em] nav-link-hover uppercase">Produk</a>
+                <a href="#kontak" class="text-gray-300 hover:text-white transition-all text-xs font-black tracking-[0.2em] nav-link-hover uppercase">Kontak</a>
             </div>
 
-            <a href="#kontak" class="hidden sm:block bg-royal-blue hover:bg-blue-700 text-white px-8 py-3 rounded-full font-bold transition-all transform hover:scale-105 shadow-xl shadow-blue-600/20">
+            <a href="#kontak" class="hidden sm:inline-flex bg-gradient-to-r from-royal-blue to-blue-700 hover:from-blue-600 hover:to-royal-blue text-white px-8 py-3.5 rounded-full font-extrabold text-sm transition-all transform hover:scale-105 shadow-xl shadow-blue-600/20 active:scale-95">
                 Hubungi Kami
             </a>
             
@@ -99,49 +140,49 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen bg-midnight pt-40 pb-56 flex items-center overflow-hidden">
+    <section id="home" class="relative min-h-screen bg-midnight pt-32 pb-44 flex items-center overflow-hidden">
         <div class="absolute inset-0 hero-gradient"></div>
         <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
         
         <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center relative z-10">
-            <div class="space-y-10 text-center lg:text-left">
-                <div class="inline-flex items-center space-x-3 bg-blue-900/30 border border-blue-800/50 px-4 py-2 rounded-full">
-                    <span class="w-2 h-2 bg-light-blue rounded-full animate-pulse"></span>
-                    <span class="text-light-blue font-bold tracking-[0.2em] text-xs uppercase">Smart Building Intelligence</span>
+            <div class="space-y-12 text-center lg:text-left" data-aos="fade-right">
+                <div class="inline-flex items-center space-x-3 bg-blue-900/20 border border-blue-500/20 px-5 py-2.5 rounded-full">
+                    <span class="w-2.5 h-2.5 bg-brand-accent rounded-full animate-pulse shadow-[0_0_10px_#00d9ff]"></span>
+                    <span class="text-brand-accent font-black tracking-[0.25em] text-[10px] uppercase">Smart Building Intelligence Solution</span>
                 </div>
                 
-                <h1 class="text-white font-display font-extrabold text-5xl md:text-6xl lg:text-7xl leading-[1.1]">
-                    GEDUNG CERDAS, <br> <span class="text-royal-blue">EFISIENSI MAKSIMAL</span>
+                <h1 class="text-white font-display font-black text-6xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tighter">
+                    GEDUNG <span class="text-transparent bg-clip-text bg-gradient-to-r from-royal-blue to-brand-accent">CERDAS</span>, <br> EFISIENSI MAKSIMAL
                 </h1>
                 
-                <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+                <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
                     Revolusionalisasi operasi gedung Anda dengan Building Management System terdepan. Real-time monitoring, otomasi cerdas, dan penghematan energi hingga 30%.
                 </p>
                 
-                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6">
-                    <a href="#kontak" class="w-full sm:w-auto bg-royal-blue hover:bg-blue-700 text-white px-10 py-5 rounded-full font-bold flex items-center justify-center space-x-3 transition-all transform hover:scale-105 shadow-2xl shadow-blue-600/40 group">
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 pt-4">
+                    <a href="#kontak" class="w-full sm:w-auto bg-gradient-to-r from-royal-blue to-blue-600 hover:from-blue-600 hover:to-royal-blue text-white px-12 py-5 rounded-full font-black flex items-center justify-center space-x-3 transition-all transform hover:scale-105 shadow-2xl shadow-blue-600/40 group">
                         <span>Minta Demo Sekarang</span>
                         <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                     </a>
-                    <a href="#solusi" class="w-full sm:w-auto border border-gray-700 hover:border-white text-white px-10 py-5 rounded-full font-bold transition-all flex items-center justify-center">
+                    <a href="#solusi" class="w-full sm:w-auto border-2 border-gray-800 hover:border-gray-600 text-white px-12 py-5 rounded-full font-black transition-all flex items-center justify-center backdrop-blur-sm">
                         Lihat Solusi
                     </a>
                 </div>
             </div>
 
-            <div class="relative flex items-center justify-center">
-                <div class="absolute w-full h-full bg-royal-blue/20 blur-[120px] rounded-full"></div>
-                <div class="relative z-10 w-full max-w-[600px] rounded-[40px] overflow-hidden border border-white/10 shadow-2xl transform hover:rotate-2 transition-transform duration-700">
-                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200" alt="Smart Building Night" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-midnight/80 to-transparent"></div>
+            <div class="relative flex items-center justify-center" data-aos="zoom-in" data-aos-delay="200">
+                <div class="absolute w-[120%] h-[120%] bg-royal-blue/20 blur-[150px] rounded-full"></div>
+                <div class="relative z-10 w-full max-w-[650px] rounded-[50px] overflow-hidden border border-white/10 shadow-3xl transform rotate-1 group float">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=90&w=1400" alt="Smart Building Night" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-midnight/90 via-midnight/20 to-transparent"></div>
                     <!-- Stats Overlay -->
-                    <div class="absolute bottom-8 left-8 right-8 flex justify-between items-end">
-                        <div class="glass p-4 rounded-2xl">
-                            <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Energy Saving</p>
-                            <p class="text-2xl font-bold text-white">Up to 30%</p>
+                    <div class="absolute bottom-10 left-10 right-10 flex justify-between items-end">
+                        <div class="glass p-6 rounded-[30px] border-l-4 border-l-brand-accent">
+                            <p class="text-[10px] text-brand-accent font-black uppercase tracking-[0.2em] mb-1">Energy Saving</p>
+                            <p class="text-3xl font-black text-white">Up to 30%</p>
                         </div>
-                        <div class="glass p-4 rounded-2xl text-right">
-                            <i class="fa-solid fa-chart-line text-light-blue text-2xl"></i>
+                        <div class="glass w-16 h-16 rounded-[25px] flex items-center justify-center text-brand-accent text-3xl shadow-blue-glow">
+                            <i class="fa-solid fa-bolt-lightning"></i>
                         </div>
                     </div>
                 </div>
@@ -149,42 +190,42 @@
         </div>
 
         <!-- Quick Info Bar -->
-        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 w-full max-w-6xl px-6">
-            <div class="glass p-10 rounded-[50px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
-                <div class="flex items-center space-x-5 text-white group cursor-default">
-                    <div class="w-14 h-14 rounded-2xl bg-royal-blue/10 flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all shadow-inner">
-                        <i class="fa-solid fa-bolt-lightning text-2xl"></i>
+        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 w-full max-w-6xl px-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="glass p-10 rounded-[60px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 border-white/5">
+                <div class="flex items-center space-x-6 text-white group cursor-default">
+                    <div class="w-16 h-16 rounded-3xl bg-royal-blue/10 flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all shadow-inner border border-white/5">
+                        <i class="fa-solid fa-microchip text-2xl"></i>
                     </div>
                     <div>
-                        <p class="text-[10px] text-gray-400 font-black uppercase tracking-widest leading-none mb-1">Energy</p>
-                        <p class="font-bold text-lg tracking-tight">Efficiency</p>
+                        <p class="text-[9px] text-gray-500 font-black uppercase tracking-widest leading-none mb-2">Automated</p>
+                        <p class="font-black text-xl tracking-tight">Efficiency</p>
                     </div>
                 </div>
-                <div class="flex items-center space-x-5 text-white group cursor-default">
-                    <div class="w-14 h-14 rounded-2xl bg-royal-blue/10 flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all shadow-inner">
-                        <i class="fa-solid fa-tower-broadcast text-2xl"></i>
+                <div class="flex items-center space-x-6 text-white group cursor-default">
+                    <div class="w-16 h-16 rounded-3xl bg-royal-blue/10 flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all shadow-inner border border-white/5">
+                        <i class="fa-solid fa-satellite-dish text-2xl"></i>
                     </div>
                     <div>
-                        <p class="text-[10px] text-gray-400 font-black uppercase tracking-widest leading-none mb-1">Real-time</p>
-                        <p class="font-bold text-lg tracking-tight">Monitoring</p>
+                        <p class="text-[9px] text-gray-500 font-black uppercase tracking-widest leading-none mb-2">Real-time</p>
+                        <p class="font-black text-xl tracking-tight">Monitoring</p>
                     </div>
                 </div>
-                <div class="flex items-center space-x-5 text-white group cursor-default">
-                    <div class="w-14 h-14 rounded-2xl bg-royal-blue/10 flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all shadow-inner">
-                        <i class="fa-solid fa-shield-halved text-2xl"></i>
+                <div class="flex items-center space-x-6 text-white group cursor-default">
+                    <div class="w-16 h-16 rounded-3xl bg-royal-blue/10 flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all shadow-inner border border-white/5">
+                        <i class="fa-solid fa-fingerprint text-2xl"></i>
                     </div>
                     <div>
-                        <p class="text-[10px] text-gray-400 font-black uppercase tracking-widest leading-none mb-1">Centralized</p>
-                        <p class="font-bold text-lg tracking-tight">Control</p>
+                        <p class="text-[9px] text-gray-500 font-black uppercase tracking-widest leading-none mb-2">Biometric</p>
+                        <p class="font-black text-xl tracking-tight">Access</p>
                     </div>
                 </div>
-                <div class="flex items-center space-x-5 text-white group cursor-default">
-                    <div class="w-14 h-14 rounded-2xl bg-royal-blue/10 flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all shadow-inner">
-                        <i class="fa-solid fa-gears text-2xl"></i>
+                <div class="flex items-center space-x-6 text-white group cursor-default">
+                    <div class="w-16 h-16 rounded-3xl bg-royal-blue/10 flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all shadow-inner border border-white/5">
+                        <i class="fa-solid fa-brain text-2xl"></i>
                     </div>
                     <div>
-                        <p class="text-[10px] text-gray-400 font-black uppercase tracking-widest leading-none mb-1">Smart</p>
-                        <p class="font-bold text-lg tracking-tight">Automation</p>
+                        <p class="text-[9px] text-gray-500 font-black uppercase tracking-widest leading-none mb-2">Predictive</p>
+                        <p class="font-black text-xl tracking-tight">Analysis</p>
                     </div>
                 </div>
             </div>
@@ -192,179 +233,131 @@
     </section>
 
     <!-- About Section -->
-    <section id="tentang" class="py-32 bg-white">
-        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
-            <div class="space-y-8">
-                <div class="inline-block bg-blue-50 text-royal-blue font-bold px-5 py-2 rounded-full text-sm uppercase tracking-widest">Tentang Kami</div>
-                <h2 class="text-4xl md:text-5xl font-display font-extrabold text-navy leading-tight">PT Surya Sarana Dinamika</h2>
-                <p class="text-gray-500 text-lg leading-relaxed font-light">Pelopor solusi Building Management Systems di Indonesia dengan pengalaman lebih dari 20 tahun. Kami adalah perusahaan terkemuka dengan keahlian mendalam dalam otomasi, robotika, dan IoT.</p>
-                <p class="text-gray-500 text-lg leading-relaxed font-light">Berkomitmen merevolusi cara gedung beroperasi dengan menyediakan solusi BMS yang inovatif dan andal. Kami menciptakan gedung yang lebih cerdas, hijau, dan efisien.</p>
+    <section id="tentang" class="py-24 md:py-32 bg-white relative overflow-hidden">
+        <div class="blob -top-24 -left-24 opacity-30"></div>
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center relative z-10">
+            <div class="space-y-10" data-aos="fade-right">
+                <div class="inline-block bg-blue-50 text-royal-blue font-black px-6 py-2 rounded-full text-[10px] uppercase tracking-[0.3em]">Tentang Kami</div>
+                <h2 class="text-5xl md:text-6xl font-display font-black text-navy leading-[0.9] tracking-tighter">PT SURYA SARANA <br><span class="text-royal-blue">DINAMIKA</span></h2>
+                <p class="text-gray-500 text-xl leading-relaxed font-medium">Pelopor solusi Building Management Systems di Indonesia dengan pengalaman lebih dari 20 tahun. Kami adalah pemimpin pasar dalam integrasi otomasi, robotika, dan teknologi IoT.</p>
                 
-                <div class="grid grid-cols-2 gap-8 pt-6">
-                    <div class="space-y-2">
-                        <p class="text-4xl font-display font-extrabold text-royal-blue">20+</p>
-                        <p class="text-navy font-bold">Tahun Pengalaman</p>
+                <div class="grid grid-cols-2 gap-10 pt-4">
+                    <div class="space-y-1">
+                        <p class="text-6xl font-display font-black text-royal-blue">20+</p>
+                        <p class="text-navy font-extrabold tracking-tight">Tahun Pengalaman</p>
                     </div>
-                    <div class="space-y-2">
-                        <p class="text-4xl font-display font-extrabold text-royal-blue">500+</p>
-                        <p class="text-navy font-bold">Proyek Selesai</p>
+                    <div class="space-y-1">
+                        <p class="text-6xl font-display font-black text-royal-blue">500+</p>
+                        <p class="text-navy font-extrabold tracking-tight">Proyek Sukses</p>
                     </div>
+                </div>
+                
+                <div class="pt-6">
+                    <a href="#kontak" class="inline-flex items-center space-x-4 text-royal-blue font-black group">
+                        <span class="text-sm uppercase tracking-widest">Ketahui Lebih Banyak</span>
+                        <div class="w-12 h-12 bg-royal-blue rounded-full flex items-center justify-center text-white group-hover:translate-x-3 transition-all">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    </a>
                 </div>
             </div>
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div class="bg-gray-50 p-8 rounded-[40px] space-y-4 hover:bg-royal-blue hover:text-white transition-all group">
-                    <div class="w-12 h-12 bg-royal-blue/10 flex items-center justify-center rounded-2xl text-royal-blue group-hover:bg-white/20 group-hover:text-white transition-all">
-                        <i class="fa-regular fa-handshake text-2xl"></i>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6" data-aos="fade-left">
+                <div class="bg-gray-50 p-10 rounded-[50px] space-y-6 hover:bg-navy hover:text-white transition-all group border border-gray-100">
+                    <div class="w-14 h-14 bg-royal-blue text-white flex items-center justify-center rounded-2xl text-2xl shadow-lg group-hover:rotate-12 transition-all">
+                        <i class="fa-regular fa-handshake"></i>
                     </div>
-                    <h3 class="text-xl font-bold">Integritas</h3>
-                    <p class="text-sm opacity-70">Kejujuran dan transparansi dalam setiap interaksi bisnis.</p>
+                    <h3 class="text-2xl font-black tracking-tight">Integritas</h3>
+                    <p class="text-sm opacity-60 leading-relaxed font-medium">Kejujuran dan transparansi mutlak dalam setiap aspek bisnis kami.</p>
                 </div>
-                <div class="bg-gray-50 p-8 rounded-[40px] space-y-4 hover:bg-royal-blue hover:text-white transition-all group">
-                    <div class="w-12 h-12 bg-royal-blue/10 flex items-center justify-center rounded-2xl text-royal-blue group-hover:bg-white/20 group-hover:text-white transition-all">
-                        <i class="fa-regular fa-star text-2xl"></i>
+                <div class="bg-gray-50 p-10 rounded-[50px] space-y-6 hover:bg-royal-blue hover:text-white transition-all group border border-gray-100">
+                    <div class="w-14 h-14 bg-white text-royal-blue flex items-center justify-center rounded-2xl text-2xl shadow-lg group-hover:rotate-12 transition-all">
+                        <i class="fa-regular fa-gem"></i>
                     </div>
-                    <h3 class="text-xl font-bold">Excellent</h3>
-                    <p class="text-sm opacity-70">Berusaha mencapai standar tertinggi dalam performa.</p>
+                    <h3 class="text-2xl font-black tracking-tight">Excellent</h3>
+                    <p class="text-sm opacity-70 leading-relaxed font-medium">Menyediakan kualitas terbaik yang melampaui standar industri.</p>
                 </div>
-                <div class="bg-gray-50 p-8 rounded-[40px] space-y-4 hover:bg-royal-blue hover:text-white transition-all group">
-                    <div class="w-12 h-12 bg-royal-blue/10 flex items-center justify-center rounded-2xl text-royal-blue group-hover:bg-white/20 group-hover:text-white transition-all">
-                        <i class="fa-regular fa-lightbulb text-2xl"></i>
+                <div class="bg-gray-50 p-10 rounded-[50px] space-y-6 hover:bg-brand-accent hover:text-navy transition-all group border border-gray-100">
+                    <div class="w-14 h-14 bg-navy text-white flex items-center justify-center rounded-2xl text-2xl shadow-lg group-hover:rotate-12 transition-all">
+                        <i class="fa-regular fa-lightbulb"></i>
                     </div>
-                    <h3 class="text-xl font-bold">Responsive</h3>
-                    <p class="text-sm opacity-70">Bereaksi cepat dan positif terhadap kebutuhan klien.</p>
+                    <h3 class="text-2xl font-black tracking-tight">Responsive</h3>
+                    <p class="text-sm opacity-60 leading-relaxed font-medium">Layanan cepat tanggap untuk setiap kebutuhan mendesak klien kami.</p>
                 </div>
-                <div class="bg-gray-50 p-8 rounded-[40px] space-y-4 hover:bg-royal-blue hover:text-white transition-all group">
-                    <div class="w-12 h-12 bg-royal-blue/10 flex items-center justify-center rounded-2xl text-royal-blue group-hover:bg-white/20 group-hover:text-white transition-all">
-                        <i class="fa-regular fa-address-book text-2xl"></i>
+                <div class="bg-gray-50 p-10 rounded-[50px] space-y-6 hover:bg-royal-blue hover:text-white transition-all group border border-gray-100">
+                    <div class="w-14 h-14 bg-white text-navy flex items-center justify-center rounded-2xl text-2xl shadow-lg group-hover:rotate-12 transition-all">
+                        <i class="fa-regular fa-address-book"></i>
                     </div>
-                    <h3 class="text-xl font-bold">Respect</h3>
-                    <p class="text-sm opacity-70">Menghargai nilai setiap individu dan stakeholder.</p>
+                    <h3 class="text-2xl font-black tracking-tight">Respect</h3>
+                    <p class="text-sm opacity-70 leading-relaxed font-medium">Menghormati setiap individu dan membangun kepercayaan bersama.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Solutions Section -->
-    <section id="solusi" class="py-32 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="space-y-6 mb-24 max-w-3xl mx-auto">
-                <span class="text-royal-blue font-bold tracking-widest text-sm uppercase bg-blue-100 px-5 py-2 rounded-full">Paket Solusi Terintegrasi</span>
-                <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold text-navy leading-tight">Solusi BMS Komprehensif</h2>
-                <div class="w-24 h-2 bg-royal-blue mx-auto rounded-full mt-6"></div>
+    <section id="solusi" class="py-24 md:py-32 bg-gray-50 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+            <div class="space-y-8 mb-24 max-w-4xl mx-auto" data-aos="fade-up">
+                <span class="text-royal-blue font-black tracking-[0.4em] text-[10px] uppercase bg-blue-100 px-6 py-3 rounded-full">Paket Solusi Terintegrasi</span>
+                <h2 class="text-6xl md:text-7xl font-display font-black text-navy leading-[0.9] tracking-tighter">SOLUSI BMS <br><span class="text-royal-blue">KOMPREHENSIF</span></h2>
+                <p class="text-gray-500 text-xl font-medium max-w-2xl mx-auto">Sistem manajemen gedung tercanggih yang dirancang untuk efisiensi, keamanan, dan keberlanjutan masa depan.</p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
                 <!-- Card 1 -->
-                <div class="bg-white rounded-[40px] overflow-hidden border border-gray-100 transition-all card-hover group shadow-xl">
-                    <div class="relative h-72 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800" alt="Smart Building" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
+                <div class="bg-white rounded-[60px] overflow-hidden border border-gray-100 transition-all card-hover group shadow-2xl" data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1000" alt="Smart Office" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
                         <div class="absolute inset-0 bg-navy/40 group-hover:bg-navy/0 transition-all duration-700"></div>
-                        <div class="absolute -bottom-8 left-10 bg-royal-blue text-white w-20 h-20 rounded-3xl flex items-center justify-center shadow-2xl group-hover:-translate-y-12 transition-all duration-700">
-                            <i class="fa-solid fa-building text-3xl"></i>
+                        <div class="absolute -bottom-10 left-12 bg-royal-blue text-white w-24 h-24 rounded-[35px] flex items-center justify-center shadow-2xl group-hover:-translate-y-16 transition-all duration-700 border-4 border-white">
+                            <i class="fa-solid fa-city text-4xl"></i>
                         </div>
                     </div>
-                    <div class="p-10 pt-16 space-y-5 text-left">
-                        <h3 class="text-2xl font-display font-bold text-navy">Smart Building Package</h3>
-                        <p class="text-gray-500 leading-relaxed">Solusi komprehensif menggabungkan berbagai sistem otomasi dan monitoring dalam satu platform terintegrasi.</p>
-                        <a href="#" class="inline-flex items-center text-royal-blue font-black group">
-                            <span class="tracking-widest uppercase text-xs">Pelajari Lebih Lanjut</span>
-                            <i class="fa-solid fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
+                    <div class="p-12 pt-20 space-y-6 text-left">
+                        <h3 class="text-3xl font-black text-navy tracking-tight">Smart Building Package</h3>
+                        <p class="text-gray-500 leading-relaxed font-medium">Platform terintegrasi untuk mengontrol seluruh subsistem gedung secara otomatis dan cerdas.</p>
+                        <a href="#" class="inline-flex items-center space-x-3 text-royal-blue font-black group">
+                            <span class="text-[10px] uppercase tracking-widest">Detail Solusi</span>
+                            <i class="fa-solid fa-arrow-right-long group-hover:translate-x-2 transition-all"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Card 2 -->
-                <div class="bg-white rounded-[40px] overflow-hidden border border-gray-100 transition-all card-hover group shadow-xl">
-                    <div class="relative h-72 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=800" alt="Energy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
+                <div class="bg-white rounded-[60px] overflow-hidden border border-gray-100 transition-all card-hover group shadow-2xl" data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=1000" alt="Energy Monitoring" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
                         <div class="absolute inset-0 bg-navy/40 group-hover:bg-navy/0 transition-all duration-700"></div>
-                        <div class="absolute -bottom-8 left-10 bg-cyan-500 text-white w-20 h-20 rounded-3xl flex items-center justify-center shadow-2xl group-hover:-translate-y-12 transition-all duration-700">
-                            <i class="fa-solid fa-clock text-3xl"></i>
+                        <div class="absolute -bottom-10 left-12 bg-brand-accent text-navy w-24 h-24 rounded-[35px] flex items-center justify-center shadow-2xl group-hover:-translate-y-16 transition-all duration-700 border-4 border-white">
+                            <i class="fa-solid fa-bolt text-4xl"></i>
                         </div>
                     </div>
-                    <div class="p-10 pt-16 space-y-5 text-left">
-                        <h3 class="text-2xl font-display font-bold text-navy">Energy Monitoring</h3>
-                        <p class="text-gray-500 leading-relaxed">Pemantauan energi real-time untuk transparansi konsumsi daya dan identifikasi potensi pemborosan.</p>
-                        <a href="#" class="inline-flex items-center text-royal-blue font-black group">
-                            <span class="tracking-widest uppercase text-xs">Pelajari Lebih Lanjut</span>
-                            <i class="fa-solid fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
+                    <div class="p-12 pt-20 space-y-6 text-left">
+                        <h3 class="text-3xl font-black text-navy tracking-tight">Energy Monitoring</h3>
+                        <p class="text-gray-500 leading-relaxed font-medium">Monitor konsumsi energi secara real-time dan identifikasi penghematan biaya operasional harian.</p>
+                        <a href="#" class="inline-flex items-center space-x-3 text-royal-blue font-black group">
+                            <span class="text-[10px] uppercase tracking-widest">Detail Solusi</span>
+                            <i class="fa-solid fa-arrow-right-long group-hover:translate-x-2 transition-all"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Card 3 -->
-                <div class="bg-white rounded-[40px] overflow-hidden border border-gray-100 transition-all card-hover group shadow-xl">
-                    <div class="relative h-72 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ecb?auto=format&fit=crop&q=80&w=800" alt="HVAC" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
+                <div class="bg-white rounded-[60px] overflow-hidden border border-gray-100 transition-all card-hover group shadow-2xl" data-aos="fade-up" data-aos-delay="300">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=1000" alt="HVAC" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
                         <div class="absolute inset-0 bg-navy/40 group-hover:bg-navy/0 transition-all duration-700"></div>
-                        <div class="absolute -bottom-8 left-10 bg-blue-600 text-white w-20 h-20 rounded-3xl flex items-center justify-center shadow-2xl group-hover:-translate-y-12 transition-all duration-700">
-                            <i class="fa-solid fa-snowflake text-3xl"></i>
+                        <div class="absolute -bottom-10 left-12 bg-blue-600 text-white w-24 h-24 rounded-[35px] flex items-center justify-center shadow-2xl group-hover:-translate-y-16 transition-all duration-700 border-4 border-white">
+                            <i class="fa-solid fa-wind text-4xl"></i>
                         </div>
                     </div>
-                    <div class="p-10 pt-16 space-y-5 text-left">
-                        <h3 class="text-2xl font-display font-bold text-navy">HVAC Automation</h3>
-                        <p class="text-gray-500 leading-relaxed">Sistem otomasi HVAC cerdas yang mengoptimalkan pendinginan dan ventilasi serta menurunkan konsumsi energi.</p>
-                        <a href="#" class="inline-flex items-center text-royal-blue font-black group">
-                            <span class="tracking-widest uppercase text-xs">Pelajari Lebih Lanjut</span>
-                            <i class="fa-solid fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="bg-white rounded-[40px] overflow-hidden border border-gray-100 transition-all card-hover group shadow-xl">
-                    <div class="relative h-72 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&q=80&w=800" alt="Lighting" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
-                        <div class="absolute inset-0 bg-navy/40 group-hover:bg-navy/0 transition-all duration-700"></div>
-                        <div class="absolute -bottom-8 left-10 bg-amber-400 text-white w-20 h-20 rounded-3xl flex items-center justify-center shadow-2xl group-hover:-translate-y-12 transition-all duration-700">
-                            <i class="fa-solid fa-lightbulb text-3xl"></i>
-                        </div>
-                    </div>
-                    <div class="p-10 pt-16 space-y-5 text-left">
-                        <h3 class="text-2xl font-display font-bold text-navy">Lighting Control</h3>
-                        <p class="text-gray-500 leading-relaxed">Kontrol pencahayaan otomatis berdasarkan occupancy dan cahaya alami untuk efisiensi energi maksimal.</p>
-                        <a href="#" class="inline-flex items-center text-royal-blue font-black group">
-                            <span class="tracking-widest uppercase text-xs">Pelajari Lebih Lanjut</span>
-                            <i class="fa-solid fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Card 5 -->
-                <div class="bg-white rounded-[40px] overflow-hidden border border-gray-100 transition-all card-hover group shadow-xl">
-                    <div class="relative h-72 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1557597774-9d2739f8ff19?auto=format&fit=crop&q=80&w=800" alt="Security" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
-                        <div class="absolute inset-0 bg-navy/40 group-hover:bg-navy/0 transition-all duration-700"></div>
-                        <div class="absolute -bottom-8 left-10 bg-red-600 text-white w-20 h-20 rounded-3xl flex items-center justify-center shadow-2xl group-hover:-translate-y-12 transition-all duration-700">
-                            <i class="fa-solid fa-eye text-3xl"></i>
-                        </div>
-                    </div>
-                    <div class="p-10 pt-16 space-y-5 text-left">
-                        <h3 class="text-2xl font-display font-bold text-navy">Security & Access</h3>
-                        <p class="text-gray-500 leading-relaxed">Sistem keamanan terintegrasi dengan CCTV dan surveillance canggih untuk keselamatan optimal.</p>
-                        <a href="#" class="inline-flex items-center text-royal-blue font-black group">
-                            <span class="tracking-widest uppercase text-xs">Pelajari Lebih Lanjut</span>
-                            <i class="fa-solid fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Card 6 -->
-                <div class="bg-white rounded-[40px] overflow-hidden border border-gray-100 transition-all card-hover group shadow-xl">
-                    <div class="relative h-72 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&q=80&w=800" alt="Parking" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
-                        <div class="absolute inset-0 bg-navy/40 group-hover:bg-navy/0 transition-all duration-700"></div>
-                        <div class="absolute -bottom-8 left-10 bg-emerald-500 text-white w-20 h-20 rounded-3xl flex items-center justify-center shadow-2xl group-hover:-translate-y-12 transition-all duration-700">
-                            <i class="fa-solid fa-clipboard-list text-3xl"></i>
-                        </div>
-                    </div>
-                    <div class="p-10 pt-16 space-y-5 text-left">
-                        <h3 class="text-2xl font-display font-bold text-navy">Predictive Maintenance</h3>
-                        <p class="text-gray-500 leading-relaxed">Sistem pemeliharaan prediktif berbasis IoT yang mengidentifikasi potensi kerusakan sebelum terjadi.</p>
-                        <a href="#" class="inline-flex items-center text-royal-blue font-black group">
-                            <span class="tracking-widest uppercase text-xs">Pelajari Lebih Lanjut</span>
-                            <i class="fa-solid fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
+                    <div class="p-12 pt-20 space-y-6 text-left">
+                        <h3 class="text-3xl font-black text-navy tracking-tight">HVAC Automation</h3>
+                        <p class="text-gray-500 leading-relaxed font-medium">Otomasi HVAC cerdas untuk kenyamanan maksimal penghuni dengan konsumsi daya minimal.</p>
+                        <a href="#" class="inline-flex items-center space-x-3 text-royal-blue font-black group">
+                            <span class="text-[10px] uppercase tracking-widest">Detail Solusi</span>
+                            <i class="fa-solid fa-arrow-right-long group-hover:translate-x-2 transition-all"></i>
                         </a>
                     </div>
                 </div>
@@ -373,156 +366,119 @@
     </section>
 
     <!-- Dashboard Preview Section -->
-    <section class="py-24 bg-navy overflow-hidden relative">
-        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+    <section class="py-24 md:py-32 bg-midnight overflow-hidden relative">
+        <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+        <div class="blob -bottom-24 -right-24 opacity-20 bg-brand-accent"></div>
+        
         <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center relative z-10">
-            <div class="space-y-12">
-                <div class="space-y-6">
-                    <h2 class="text-white text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.1]">Manfaat Utama BMS <br><span class="text-royal-blue">Untuk Gedung Anda</span></h2>
-                    <p class="text-gray-400 text-xl font-light leading-relaxed">Sistem terintegrasi kami memberikan nilai tambah yang signifikan bagi pemilik gedung dan penghuninya.</p>
+            <div class="space-y-12" data-aos="fade-right">
+                <div class="space-y-8">
+                    <span class="text-brand-accent font-black tracking-[0.4em] text-[10px] uppercase">Data Analytics Dashboard</span>
+                    <h2 class="text-6xl md:text-7xl font-display font-black text-white leading-[0.9] tracking-tighter">MANFAAT BMS <br><span class="text-brand-accent">UNTUK GEDUNG</span></h2>
+                    <p class="text-gray-400 text-xl font-medium leading-relaxed">Kelola seluruh portofolio properti Anda dari satu layar sentral dengan visualisasi data yang mendalam.</p>
                 </div>
                 
-                <ul class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <li class="flex items-start space-x-5 text-white group">
-                        <div class="w-12 h-12 bg-royal-blue/20 rounded-2xl flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all shadow-inner mt-1">
-                            <i class="fa-solid fa-bolt text-xl"></i>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div class="flex items-start space-x-6 text-white group">
+                        <div class="w-16 h-16 bg-brand-accent/10 rounded-[25px] flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-navy transition-all shadow-blue-glow mt-1">
+                            <i class="fa-solid fa-leaf text-2xl"></i>
                         </div>
                         <div>
-                            <h4 class="font-bold text-lg">Efisiensi Energi</h4>
-                            <p class="text-gray-500 text-sm">Penghematan biaya hingga 30%.</p>
+                            <h4 class="font-black text-2xl tracking-tight">Eco-Friendly</h4>
+                            <p class="text-gray-500 text-sm font-medium">Kurangi jejak karbon bangunan.</p>
                         </div>
-                    </li>
-                    <li class="flex items-start space-x-5 text-white group">
-                        <div class="w-12 h-12 bg-royal-blue/20 rounded-2xl flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all shadow-inner mt-1">
-                            <i class="fa-solid fa-shield-halved text-xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-lg">Perlindungan Aset</h4>
-                            <p class="text-gray-500 text-sm">Monitor kesehatan peralatan 24/7.</p>
-                        </div>
-                    </li>
-                    <li class="flex items-start space-x-5 text-white group">
-                        <div class="w-12 h-12 bg-royal-blue/20 rounded-2xl flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all shadow-inner mt-1">
-                            <i class="fa-solid fa-chart-line text-xl"></i>
+                    </div>
+                    <div class="flex items-start space-x-6 text-white group">
+                        <div class="w-16 h-16 bg-brand-accent/10 rounded-[25px] flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-navy transition-all shadow-blue-glow mt-1">
+                            <i class="fa-solid fa-shield-virus text-2xl"></i>
                         </div>
                         <div>
-                            <h4 class="font-bold text-lg">Manajemen Optimal</h4>
-                            <p class="text-gray-500 text-sm">Pengelolaan gedung terpusat.</p>
+                            <h4 class="font-black text-2xl tracking-tight">Security 24/7</h4>
+                            <p class="text-gray-500 text-sm font-medium">Sistem perlindungan proaktif.</p>
                         </div>
-                    </li>
-                    <li class="flex items-start space-x-5 text-white group">
-                        <div class="w-12 h-12 bg-royal-blue/20 rounded-2xl flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all shadow-inner mt-1">
-                            <i class="fa-solid fa-user-plus text-xl"></i>
+                    </div>
+                    <div class="flex items-start space-x-6 text-white group">
+                        <div class="w-16 h-16 bg-brand-accent/10 rounded-[25px] flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-navy transition-all shadow-blue-glow mt-1">
+                            <i class="fa-solid fa-chart-pie text-2xl"></i>
                         </div>
                         <div>
-                            <h4 class="font-bold text-lg">Produktivitas</h4>
-                            <p class="text-gray-500 text-sm">Lingkungan kerja yang optimal.</p>
+                            <h4 class="font-black text-2xl tracking-tight">Big Data</h4>
+                            <p class="text-gray-500 text-sm font-medium">Analisis konsumsi mendalam.</p>
                         </div>
-                    </li>
-                </ul>
+                    </div>
+                    <div class="flex items-start space-x-6 text-white group">
+                        <div class="w-16 h-16 bg-brand-accent/10 rounded-[25px] flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-navy transition-all shadow-blue-glow mt-1">
+                            <i class="fa-solid fa-mobile-screen text-2xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-black text-2xl tracking-tight">Anywhere</h4>
+                            <p class="text-gray-500 text-sm font-medium">Akses via Mobile & Web.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             
-            <div class="relative group">
-                <div class="absolute inset-0 bg-royal-blue/20 blur-[100px] rounded-full group-hover:blur-[120px] transition-all"></div>
-                <div class="relative z-10 rounded-[50px] overflow-hidden border border-white/10 shadow-4xl transform group-hover:rotate-2 transition-all duration-700">
-                    <img src="https://images.unsplash.com/photo-1551288049-bbbda5366a7a?auto=format&fit=crop&q=80&w=1200" alt="Dashboard Preview" class="w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-navy/60 to-transparent"></div>
+            <div class="relative group" data-aos="fade-left">
+                <div class="absolute inset-0 bg-brand-accent/20 blur-[120px] rounded-full"></div>
+                <div class="relative z-10 rounded-[60px] overflow-hidden border border-white/10 shadow-3xl transform rotate-1 group-hover:rotate-0 transition-all duration-1000">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1400" alt="Dashboard Analysis" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-midnight/80 via-transparent to-transparent"></div>
+                    <!-- Shimmer effect -->
+                    <div class="absolute inset-0 shimmer opacity-30"></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="layanan" class="py-32 bg-white">
+    <section id="layanan" class="py-24 md:py-32 bg-white relative">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center space-y-6 mb-24 max-w-3xl mx-auto">
-                <span class="text-royal-blue font-bold tracking-widest text-sm uppercase">Layanan Kami</span>
-                <h2 class="text-4xl md:text-5xl font-display font-extrabold text-navy">Paket Layanan Komprehensif</h2>
-                <div class="w-20 h-1.5 bg-royal-blue mx-auto rounded-full mt-4"></div>
+            <div class="text-center space-y-8 mb-24 max-w-4xl mx-auto" data-aos="fade-up">
+                <span class="text-royal-blue font-black tracking-[0.4em] text-[10px] uppercase">Layanan Kami</span>
+                <h2 class="text-6xl md:text-7xl font-display font-black text-navy leading-[0.9] tracking-tighter">PAKET LAYANAN <br><span class="text-royal-blue">KOMPREHENSIF</span></h2>
+                <p class="text-gray-500 text-xl font-medium max-w-2xl mx-auto">Kami mendampingi transformasi digital gedung Anda dari tahap perencanaan hingga pemeliharaan jangka panjang.</p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
                 <!-- Service 1 -->
-                <div class="bg-gray-50 p-10 rounded-[50px] space-y-8 hover:bg-royal-blue hover:text-white transition-all group shadow-sm">
-                    <div class="w-16 h-16 bg-royal-blue text-white rounded-2xl flex items-center justify-center text-3xl group-hover:bg-white group-hover:text-royal-blue transition-all shadow-lg">
-                        <i class="fa-regular fa-file-lines"></i>
+                <div class="bg-gray-50 p-12 rounded-[60px] space-y-10 hover:bg-navy hover:text-white transition-all group shadow-sm border border-gray-100" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-20 h-20 bg-royal-blue text-white rounded-[28px] flex items-center justify-center text-4xl group-hover:bg-white group-hover:text-navy transition-all shadow-xl group-hover:rotate-12">
+                        <i class="fa-regular fa-lightbulb"></i>
                     </div>
-                    <div class="space-y-4">
-                        <h3 class="text-2xl font-bold">Konsultasi & Desain</h3>
-                        <ul class="space-y-3 opacity-70">
-                            <li class="flex items-center"><i class="fa-solid fa-chevron-right mr-3 text-xs"></i>Analisis kebutuhan detail</li>
-                            <li class="flex items-center"><i class="fa-solid fa-chevron-right mr-3 text-xs"></i>Desain sistem optimal</li>
-                            <li class="flex items-center"><i class="fa-solid fa-chevron-right mr-3 text-xs"></i>Kalkulasi efisiensi</li>
+                    <div class="space-y-6">
+                        <h3 class="text-3xl font-black tracking-tight">Konsultasi & Desain</h3>
+                        <ul class="space-y-4 font-medium opacity-60">
+                            <li class="flex items-center space-x-4"><div class="w-2 h-2 bg-royal-blue rounded-full"></div><span>Analisis kebutuhan detail</span></li>
+                            <li class="flex items-center space-x-4"><div class="w-2 h-2 bg-royal-blue rounded-full"></div><span>Desain sistem optimal</span></li>
+                            <li class="flex items-center space-x-4"><div class="w-2 h-2 bg-royal-blue rounded-full"></div><span>Kalkulasi efisiensi ROI</span></li>
                         </ul>
                     </div>
                 </div>
                 <!-- Service 2 -->
-                <div class="bg-gray-50 p-10 rounded-[50px] space-y-8 hover:bg-royal-blue hover:text-white transition-all group shadow-sm">
-                    <div class="w-16 h-16 bg-royal-blue text-white rounded-2xl flex items-center justify-center text-3xl group-hover:bg-white group-hover:text-royal-blue transition-all shadow-lg">
+                <div class="bg-gray-50 p-12 rounded-[60px] space-y-10 hover:bg-royal-blue hover:text-white transition-all group shadow-sm border border-gray-100" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-20 h-20 bg-navy text-white rounded-[28px] flex items-center justify-center text-4xl group-hover:bg-white group-hover:text-royal-blue transition-all shadow-xl group-hover:rotate-12">
                         <i class="fa-regular fa-paper-plane"></i>
                     </div>
-                    <div class="space-y-4">
-                        <h3 class="text-2xl font-bold">Instalasi & Implementasi</h3>
-                        <ul class="space-y-3 opacity-70">
-                            <li class="flex items-center"><i class="fa-solid fa-chevron-right mr-3 text-xs"></i>Instalasi hardware profesional</li>
-                            <li class="flex items-center"><i class="fa-solid fa-chevron-right mr-3 text-xs"></i>Integrasi subsistem lengkap</li>
-                            <li class="flex items-center"><i class="fa-solid fa-chevron-right mr-3 text-xs"></i>Konfigurasi software expert</li>
+                    <div class="space-y-6">
+                        <h3 class="text-3xl font-black tracking-tight">Instalasi</h3>
+                        <ul class="space-y-4 font-medium opacity-70">
+                            <li class="flex items-center space-x-4"><div class="w-2 h-2 bg-white/40 rounded-full"></div><span>Hardware profesional</span></li>
+                            <li class="flex items-center space-x-4"><div class="w-2 h-2 bg-white/40 rounded-full"></div><span>Integrasi subsistem</span></li>
+                            <li class="flex items-center space-x-4"><div class="w-2 h-2 bg-white/40 rounded-full"></div><span>Konfigurasi expert</span></li>
                         </ul>
                     </div>
                 </div>
                 <!-- Service 3 -->
-                <div class="bg-gray-50 p-10 rounded-[50px] space-y-8 hover:bg-royal-blue hover:text-white transition-all group shadow-sm">
-                    <div class="w-16 h-16 bg-royal-blue text-white rounded-2xl flex items-center justify-center text-3xl group-hover:bg-white group-hover:text-royal-blue transition-all shadow-lg">
+                <div class="bg-gray-50 p-12 rounded-[60px] space-y-10 hover:bg-navy hover:text-white transition-all group shadow-sm border border-gray-100" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-20 h-20 bg-royal-blue text-white rounded-[28px] flex items-center justify-center text-4xl group-hover:bg-white group-hover:text-navy transition-all shadow-xl group-hover:rotate-12">
                         <i class="fa-regular fa-circle-check"></i>
                     </div>
-                    <div class="space-y-4">
-                        <h3 class="text-2xl font-bold">Testing & Training</h3>
-                        <ul class="space-y-3 opacity-70">
-                            <li class="flex items-center"><i class="fa-solid fa-chevron-right mr-3 text-xs"></i>Pengujian sistem menyeluruh</li>
-                            <li class="flex items-center"><i class="fa-solid fa-chevron-right mr-3 text-xs"></i>Training operasional staff</li>
-                            <li class="flex items-center"><i class="fa-solid fa-chevron-right mr-3 text-xs"></i>Dokumentasi teknis lengkap</li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Service 4 -->
-                <div class="bg-gray-50 p-10 rounded-[50px] space-y-8 hover:bg-royal-blue hover:text-white transition-all group shadow-sm">
-                    <div class="w-16 h-16 bg-royal-blue text-white rounded-2xl flex items-center justify-center text-3xl group-hover:bg-white group-hover:text-royal-blue transition-all shadow-lg">
-                        <i class="fa-regular fa-life-ring"></i>
-                    </div>
-                    <div class="space-y-4">
-                        <h3 class="text-2xl font-bold">Maintenance & Support</h3>
-                        <ul class="space-y-3 opacity-70">
-                            <li class="flex items-center"><i class="fa-solid fa-chevron-right mr-3 text-xs"></i>Maintenance rutin terjadwal</li>
-                            <li class="flex items-center"><i class="fa-solid fa-chevron-right mr-3 text-xs"></i>Support teknis 24/7</li>
-                            <li class="flex items-center"><i class="fa-solid fa-chevron-right mr-3 text-xs"></i>Monitoring proaktif jarak jauh</li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Service 5 -->
-                <div class="bg-gray-50 p-10 rounded-[50px] space-y-8 hover:bg-royal-blue hover:text-white transition-all group shadow-sm">
-                    <div class="w-16 h-16 bg-royal-blue text-white rounded-2xl flex items-center justify-center text-3xl group-hover:bg-white group-hover:text-royal-blue transition-all shadow-lg">
-                        <i class="fa-regular fa-square-plus"></i>
-                    </div>
-                    <div class="space-y-4">
-                        <h3 class="text-2xl font-bold">Penyediaan Komponen</h3>
-                        <ul class="space-y-3 opacity-70">
-                            <li class="flex items-center"><i class="fa-solid fa-chevron-right mr-3 text-xs"></i>Spare parts berkualitas tinggi</li>
-                            <li class="flex items-center"><i class="fa-solid fa-chevron-right mr-3 text-xs"></i>Instalasi penggantian cepat</li>
-                            <li class="flex items-center"><i class="fa-solid fa-chevron-right mr-3 text-xs"></i>Garansi komponen resmi</li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Service 6 -->
-                <div class="bg-gray-50 p-10 rounded-[50px] space-y-8 hover:bg-royal-blue hover:text-white transition-all group shadow-sm">
-                    <div class="w-16 h-16 bg-royal-blue text-white rounded-2xl flex items-center justify-center text-3xl group-hover:bg-white group-hover:text-royal-blue transition-all shadow-lg">
-                        <i class="fa-regular fa-chart-bar"></i>
-                    </div>
-                    <div class="space-y-4">
-                        <h3 class="text-2xl font-bold">Optimalisasi Berkelanjutan</h3>
-                        <ul class="space-y-3 opacity-70">
-                            <li class="flex items-center"><i class="fa-solid fa-chevron-right mr-3 text-xs"></i>Monitoring performa real-time</li>
-                            <li class="flex items-center"><i class="fa-solid fa-chevron-right mr-3 text-xs"></i>Analisis data konsumsi</li>
-                            <li class="flex items-center"><i class="fa-solid fa-chevron-right mr-3 text-xs"></i>Rekomendasi optimasi berkala</li>
+                    <div class="space-y-6">
+                        <h3 class="text-3xl font-black tracking-tight">Maintenance</h3>
+                        <ul class="space-y-4 font-medium opacity-60">
+                            <li class="flex items-center space-x-4"><div class="w-2 h-2 bg-royal-blue rounded-full"></div><span>Rutin terjadwal</span></li>
+                            <li class="flex items-center space-x-4"><div class="w-2 h-2 bg-royal-blue rounded-full"></div><span>Support teknis 24/7</span></li>
+                            <li class="flex items-center space-x-4"><div class="w-2 h-2 bg-royal-blue rounded-full"></div><span>Monitoring proaktif</span></li>
                         </ul>
                     </div>
                 </div>
@@ -531,99 +487,85 @@
     </section>
 
     <!-- Products Section -->
-    <section id="produk" class="py-32 bg-gray-50">
+    <section id="produk" class="py-24 md:py-32 bg-gray-50 overflow-hidden relative">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center space-y-6 mb-24 max-w-3xl mx-auto">
-                <span class="text-royal-blue font-bold tracking-widest text-sm uppercase bg-blue-100 px-5 py-2 rounded-full">Katalog Produk</span>
-                <h2 class="text-4xl md:text-5xl font-display font-extrabold text-navy leading-tight">Komponen BMS Premium</h2>
-                <p class="text-gray-500 text-lg">Partnership dengan pabrikan terkemuka dunia untuk kualitas terbaik.</p>
+            <div class="text-center space-y-8 mb-24 max-w-4xl mx-auto" data-aos="fade-up">
+                <span class="text-royal-blue font-black tracking-[0.4em] text-[10px] uppercase bg-white px-6 py-3 rounded-full shadow-sm">Katalog Produk</span>
+                <h2 class="text-6xl md:text-7xl font-display font-black text-navy leading-[0.9] tracking-tighter">KOMPONEN BMS <br><span class="text-royal-blue">PREMIUM</span></h2>
+                <p class="text-gray-500 text-xl font-medium max-w-2xl mx-auto">Kami bekerja sama dengan partner teknologi global untuk menghadirkan kualitas terbaik.</p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Product 1 -->
-                <div class="bg-white p-10 rounded-[40px] border-l-8 border-royal-blue hover:shadow-2xl transition-all group">
-                    <p class="text-royal-blue font-black text-xs uppercase tracking-widest mb-2">Yaskawa</p>
-                    <h3 class="text-2xl font-bold text-navy mb-4">Inverter (VSD)</h3>
-                    <p class="text-gray-500 text-sm mb-6 leading-relaxed"><strong>Solusi:</strong> Mengatur kecepatan motor sesuai beban.<br><strong>Benefit:</strong> Hemat energi 40%, perpanjang umur motor.</p>
+                <div class="bg-white p-12 rounded-[50px] border-b-8 border-royal-blue hover:shadow-3xl transition-all group hover:-translate-y-4 duration-500" data-aos="fade-up">
+                    <div class="flex justify-between items-start mb-8">
+                        <p class="text-royal-blue font-black text-xs uppercase tracking-widest">Yaskawa</p>
+                        <i class="fa-solid fa-microchip text-gray-100 text-5xl absolute right-10 top-10 group-hover:text-royal-blue/10 transition-colors"></i>
+                    </div>
+                    <h3 class="text-3xl font-black text-navy mb-4 tracking-tight">Inverter (VSD)</h3>
+                    <p class="text-gray-500 font-medium leading-relaxed"><strong>Solusi:</strong> Mengatur kecepatan motor secara efisien.<br><strong>Benefit:</strong> Hemat energi 40%, umur motor lebih lama.</p>
                 </div>
                 <!-- Product 2 -->
-                <div class="bg-white p-10 rounded-[40px] border-l-8 border-royal-blue hover:shadow-2xl transition-all group">
-                    <p class="text-royal-blue font-black text-xs uppercase tracking-widest mb-2">Autonics / Johnson Controls</p>
-                    <h3 class="text-2xl font-bold text-navy mb-4">Sensor Suhu & Kelembapan</h3>
-                    <p class="text-gray-500 text-sm mb-6 leading-relaxed"><strong>Solusi:</strong> Pemantauan real-time kondisi ruangan.<br><strong>Benefit:</strong> Kenyamanan optimal, efisiensi HVAC.</p>
+                <div class="bg-white p-12 rounded-[50px] border-b-8 border-brand-accent hover:shadow-3xl transition-all group hover:-translate-y-4 duration-500" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex justify-between items-start mb-8">
+                        <p class="text-brand-accent font-black text-xs uppercase tracking-widest">Johnson Controls</p>
+                        <i class="fa-solid fa-temperature-full text-gray-100 text-5xl absolute right-10 top-10 group-hover:text-brand-accent/10 transition-colors"></i>
+                    </div>
+                    <h3 class="text-3xl font-black text-navy mb-4 tracking-tight">Precision Sensors</h3>
+                    <p class="text-gray-500 font-medium leading-relaxed"><strong>Solusi:</strong> Pemantauan suhu & kelembapan real-time.<br><strong>Benefit:</strong> Kenyamanan optimal penghuni gedung.</p>
                 </div>
                 <!-- Product 3 -->
-                <div class="bg-white p-10 rounded-[40px] border-l-8 border-royal-blue hover:shadow-2xl transition-all group">
-                    <p class="text-royal-blue font-black text-xs uppercase tracking-widest mb-2">Mitsubishi Electric</p>
-                    <h3 class="text-2xl font-bold text-navy mb-4">Programmable Controller</h3>
-                    <p class="text-gray-500 text-sm mb-6 leading-relaxed"><strong>Solusi:</strong> Kontrol sentral dan integrasi sistem.<br><strong>Benefit:</strong> Otomasi cerdas, monitoring real-time.</p>
-                </div>
-                <!-- Product 4 -->
-                <div class="bg-white p-10 rounded-[40px] border-l-8 border-royal-blue hover:shadow-2xl transition-all group">
-                    <p class="text-royal-blue font-black text-xs uppercase tracking-widest mb-2">Johnson Controls</p>
-                    <h3 class="text-2xl font-bold text-navy mb-4">Pressure Transmitter</h3>
-                    <p class="text-gray-500 text-sm mb-6 leading-relaxed"><strong>Solusi:</strong> Deteksi dini masalah tekanan sistem.<br><strong>Benefit:</strong> Notifikasi cepat, cegah kerusakan.</p>
-                </div>
-                <!-- Product 5 -->
-                <div class="bg-white p-10 rounded-[40px] border-l-8 border-royal-blue hover:shadow-2xl transition-all group">
-                    <p class="text-royal-blue font-black text-xs uppercase tracking-widest mb-2">Autonics</p>
-                    <h3 class="text-2xl font-bold text-navy mb-4">Automation Products</h3>
-                    <p class="text-gray-500 text-sm mb-6 leading-relaxed"><strong>Solusi:</strong> Sensor, kontroler, switch otomasi cerdas.<br><strong>Benefit:</strong> Reliability tinggi, cost-effective.</p>
-                </div>
-                <!-- Product 6 -->
-                <div class="bg-white p-10 rounded-[40px] border-l-8 border-royal-blue hover:shadow-2xl transition-all group">
-                    <p class="text-royal-blue font-black text-xs uppercase tracking-widest mb-2">Weidmüller</p>
-                    <h3 class="text-2xl font-bold text-navy mb-4">Wireless & Connectivity</h3>
-                    <p class="text-gray-500 text-sm mb-6 leading-relaxed"><strong>Solusi:</strong> Koneksi wireless dan networking industri.<br><strong>Benefit:</strong> Instalasi fleksibel, skalabilitas tinggi.</p>
+                <div class="bg-white p-12 rounded-[50px] border-b-8 border-navy hover:shadow-3xl transition-all group hover:-translate-y-4 duration-500" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex justify-between items-start mb-8">
+                        <p class="text-navy font-black text-xs uppercase tracking-widest">Mitsubishi Electric</p>
+                        <i class="fa-solid fa-server text-gray-100 text-5xl absolute right-10 top-10 group-hover:text-navy/10 transition-colors"></i>
+                    </div>
+                    <h3 class="text-3xl font-black text-navy mb-4 tracking-tight">Logic Controllers</h3>
+                    <p class="text-gray-500 font-medium leading-relaxed"><strong>Solusi:</strong> Otomasi kontrol terpusat seluruh sistem.<br><strong>Benefit:</strong> Monitoring terpadu & performa stabil.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Industries Section -->
-    <section id="industries" class="py-32 bg-white">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="space-y-4 mb-24">
-                <h2 class="text-4xl md:text-5xl font-display font-extrabold text-navy">Solusi untuk Berbagai Industri</h2>
-                <div class="w-20 h-1.5 bg-royal-blue mx-auto rounded-full"></div>
-            </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10">
-                <div class="group p-8 rounded-[30px] hover:bg-gray-50 transition-all cursor-default text-center">
-                    <div class="w-20 h-20 mx-auto mb-6 bg-gray-50 rounded-[20px] flex items-center justify-center text-gray-400 group-hover:bg-royal-blue group-hover:text-white group-hover:rotate-12 transition-all duration-500 shadow-sm group-hover:shadow-xl group-hover:shadow-blue-600/30">
-                        <i class="fa-solid fa-building-user text-3xl"></i>
+    <!-- Industries Section (Compact) -->
+    <section id="industries" class="py-20 md:py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+                <div class="group text-center space-y-4" data-aos="zoom-in">
+                    <div class="w-24 h-24 mx-auto bg-gray-50 rounded-[40px] flex items-center justify-center text-gray-300 group-hover:bg-royal-blue group-hover:text-white group-hover:shadow-xl group-hover:shadow-blue-600/30 group-hover:-translate-y-3 transition-all duration-500">
+                        <i class="fa-solid fa-building-user text-4xl"></i>
                     </div>
-                    <p class="font-bold text-lg text-navy">Office</p>
+                    <p class="font-black text-navy uppercase tracking-widest text-[10px]">Office</p>
                 </div>
-                <div class="group p-8 rounded-[30px] hover:bg-gray-50 transition-all cursor-default text-center">
-                    <div class="w-20 h-20 mx-auto mb-6 bg-gray-50 rounded-[20px] flex items-center justify-center text-gray-400 group-hover:bg-royal-blue group-hover:text-white group-hover:rotate-12 transition-all duration-500 shadow-sm group-hover:shadow-xl group-hover:shadow-blue-600/30">
-                        <i class="fa-solid fa-school text-3xl"></i>
+                <div class="group text-center space-y-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="w-24 h-24 mx-auto bg-gray-50 rounded-[40px] flex items-center justify-center text-gray-300 group-hover:bg-brand-accent group-hover:text-navy group-hover:shadow-xl group-hover:shadow-cyan-400/30 group-hover:-translate-y-3 transition-all duration-500">
+                        <i class="fa-solid fa-school text-4xl"></i>
                     </div>
-                    <p class="font-bold text-lg text-navy">Campus</p>
+                    <p class="font-black text-navy uppercase tracking-widest text-[10px]">Campus</p>
                 </div>
-                <div class="group p-8 rounded-[30px] hover:bg-gray-50 transition-all cursor-default text-center">
-                    <div class="w-20 h-20 mx-auto mb-6 bg-gray-50 rounded-[20px] flex items-center justify-center text-gray-400 group-hover:bg-royal-blue group-hover:text-white group-hover:rotate-12 transition-all duration-500 shadow-sm group-hover:shadow-xl group-hover:shadow-blue-600/30">
-                        <i class="fa-solid fa-hospital-user text-3xl"></i>
+                <div class="group text-center space-y-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="w-24 h-24 mx-auto bg-gray-50 rounded-[40px] flex items-center justify-center text-gray-300 group-hover:bg-royal-blue group-hover:text-white group-hover:shadow-xl group-hover:shadow-blue-600/30 group-hover:-translate-y-3 transition-all duration-500">
+                        <i class="fa-solid fa-hospital-user text-4xl"></i>
                     </div>
-                    <p class="font-bold text-lg text-navy">Hospital</p>
+                    <p class="font-black text-navy uppercase tracking-widest text-[10px]">Hospital</p>
                 </div>
-                <div class="group p-8 rounded-[30px] hover:bg-gray-50 transition-all cursor-default text-center">
-                    <div class="w-20 h-20 mx-auto mb-6 bg-gray-50 rounded-[20px] flex items-center justify-center text-gray-400 group-hover:bg-royal-blue group-hover:text-white group-hover:rotate-12 transition-all duration-500 shadow-sm group-hover:shadow-xl group-hover:shadow-blue-600/30">
-                        <i class="fa-solid fa-gears text-3xl"></i>
+                <div class="group text-center space-y-4" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="w-24 h-24 mx-auto bg-gray-50 rounded-[40px] flex items-center justify-center text-gray-300 group-hover:bg-navy group-hover:text-white group-hover:shadow-xl group-hover:shadow-navy/30 group-hover:-translate-y-3 transition-all duration-500">
+                        <i class="fa-solid fa-industry text-4xl"></i>
                     </div>
-                    <p class="font-bold text-lg text-navy">Factory</p>
+                    <p class="font-black text-navy uppercase tracking-widest text-[10px]">Factory</p>
                 </div>
-                <div class="group p-8 rounded-[30px] hover:bg-gray-50 transition-all cursor-default text-center">
-                    <div class="w-20 h-20 mx-auto mb-6 bg-gray-50 rounded-[20px] flex items-center justify-center text-gray-400 group-hover:bg-royal-blue group-hover:text-white group-hover:rotate-12 transition-all duration-500 shadow-sm group-hover:shadow-xl group-hover:shadow-blue-600/30">
-                        <i class="fa-solid fa-database text-3xl"></i>
+                <div class="group text-center space-y-4" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="w-24 h-24 mx-auto bg-gray-50 rounded-[40px] flex items-center justify-center text-gray-300 group-hover:bg-brand-accent group-hover:text-navy group-hover:shadow-xl group-hover:shadow-cyan-400/30 group-hover:-translate-y-3 transition-all duration-500">
+                        <i class="fa-solid fa-database text-4xl"></i>
                     </div>
-                    <p class="font-bold text-lg text-navy">Data Center</p>
+                    <p class="font-black text-navy uppercase tracking-widest text-[10px]">Data Center</p>
                 </div>
-                <div class="group p-8 rounded-[30px] hover:bg-gray-50 transition-all cursor-default text-center">
-                    <div class="w-20 h-20 mx-auto mb-6 bg-gray-50 rounded-[20px] flex items-center justify-center text-gray-400 group-hover:bg-royal-blue group-hover:text-white group-hover:rotate-12 transition-all duration-500 shadow-sm group-hover:shadow-xl group-hover:shadow-blue-600/30">
-                        <i class="fa-solid fa-shop text-3xl"></i>
+                <div class="group text-center space-y-4" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="w-24 h-24 mx-auto bg-gray-50 rounded-[40px] flex items-center justify-center text-gray-300 group-hover:bg-royal-blue group-hover:text-white group-hover:shadow-xl group-hover:shadow-blue-600/30 group-hover:-translate-y-3 transition-all duration-500">
+                        <i class="fa-solid fa-shop text-4xl"></i>
                     </div>
-                    <p class="font-bold text-lg text-navy">Mall</p>
+                    <p class="font-black text-navy uppercase tracking-widest text-[10px]">Retail Mall</p>
                 </div>
             </div>
         </div>
@@ -631,94 +573,93 @@
 
     <!-- CTA Section -->
     <section class="py-20 px-6">
-        <div class="max-w-7xl mx-auto bg-royal-blue rounded-[60px] p-12 lg:p-24 flex flex-col lg:flex-row items-center justify-between gap-16 relative overflow-hidden shadow-4xl shadow-blue-600/30">
+        <div class="max-w-7xl mx-auto bg-royal-blue rounded-[80px] p-16 lg:p-24 flex flex-col lg:flex-row items-center justify-between gap-16 relative overflow-hidden shadow-3xl shadow-blue-600/40" data-aos="zoom-out">
             <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
-            <div class="absolute top-0 right-0 w-96 h-96 bg-white/10 blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2"></div>
+            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
             
-            <div class="relative z-10 text-white space-y-6 text-center lg:text-left">
-                <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight">Siap Transformasi <br>Gedung Anda?</h2>
-                <p class="text-xl text-blue-100/80 max-w-lg mx-auto lg:mx-0">Dapatkan konsultasi gratis dari tim ahli kami dan lihat bagaimana BMS dapat menghemat biaya operasional Anda hingga 30%.</p>
+            <div class="relative z-10 text-white space-y-8 text-center lg:text-left">
+                <h2 class="text-6xl md:text-7xl font-display font-black leading-[0.9] tracking-tighter">SIAP TRANSFORMASI <br>GEDUNG ANDA?</h2>
+                <p class="text-xl text-blue-100/80 max-w-lg mx-auto lg:mx-0 font-medium">Dapatkan konsultasi gratis dari tim ahli kami dan hemat biaya operasional Anda hingga 30%.</p>
             </div>
             
-            <div class="relative z-10 text-center lg:text-right space-y-8 w-full lg:w-auto">
-                <a href="#kontak" class="w-full sm:w-auto bg-white text-royal-blue hover:bg-blue-50 px-14 py-6 rounded-full font-black text-xl transition-all shadow-3xl inline-flex items-center justify-center transform hover:scale-105 active:scale-95">
-                    Hubungi Kami
+            <div class="relative z-10 text-center lg:text-right space-y-10 w-full lg:w-auto">
+                <a href="#kontak" class="w-full sm:w-auto bg-white text-royal-blue hover:bg-blue-50 px-16 py-7 rounded-full font-black text-2xl transition-all shadow-3xl inline-flex items-center justify-center transform hover:scale-110 active:scale-95 group">
+                    Hubungi Kami <i class="fa-solid fa-comments ml-4 group-hover:rotate-12 transition-transform"></i>
                 </a>
-                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-end gap-4 text-white">
-                    <div class="flex items-center space-x-3 bg-white/10 px-5 py-2 rounded-full backdrop-blur-md">
-                        <i class="fa-brands fa-whatsapp text-2xl text-green-400"></i>
-                        <a href="#" class="hover:underline font-bold tracking-tight">(+62-21) 6583 5077</a>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="kontak" class="py-32 bg-gray-50">
+    <section id="kontak" class="py-24 md:py-32 bg-gray-50 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-20">
-                <div class="space-y-12">
-                    <div class="space-y-6">
-                        <h2 class="text-4xl md:text-5xl font-display font-extrabold text-navy">Mari Kita Bicara</h2>
-                        <p class="text-gray-500 text-lg leading-relaxed">Tim kami siap membantu mewujudkan visi gedung cerdas Anda. Kirimkan pesan atau kunjungi kantor kami.</p>
+            <div class="grid lg:grid-cols-2 gap-24 items-start">
+                <div class="space-y-16" data-aos="fade-right">
+                    <div class="space-y-8 text-center lg:text-left">
+                        <span class="text-royal-blue font-black tracking-[0.4em] text-[10px] uppercase">Get In Touch</span>
+                        <h2 class="text-6xl md:text-7xl font-display font-black text-navy leading-[0.9] tracking-tighter">MARI KITA <br><span class="text-royal-blue">BICARA</span></h2>
+                        <p class="text-gray-500 text-xl leading-relaxed font-medium">Tim ahli kami siap membantu mewujudkan visi gedung cerdas Anda. Hubungi kami untuk penawaran terbaik.</p>
                     </div>
                     
-                    <div class="space-y-8">
-                        <div class="flex items-start space-x-6 group">
-                            <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-royal-blue text-2xl shadow-lg transition-all group-hover:bg-royal-blue group-hover:text-white">
-                                <i class="fa-solid fa-location-dot"></i>
+                    <div class="space-y-10">
+                        <div class="flex items-start space-x-8 group">
+                            <div class="w-20 h-20 bg-white rounded-[30px] flex items-center justify-center text-royal-blue text-3xl shadow-xl transition-all group-hover:bg-royal-blue group-hover:text-white group-hover:rotate-6">
+                                <i class="fa-solid fa-location-arrow"></i>
                             </div>
                             <div>
-                                <h4 class="text-xl font-bold text-navy">Head Office - Jakarta</h4>
-                                <p class="text-gray-500">Perdambatan Mega Sunter B-40</p>
-                                <p class="text-gray-500">Jl. Danau Sunter Selatan, Jakarta 14350</p>
+                                <h4 class="text-2xl font-black text-navy tracking-tight mb-2">Head Office</h4>
+                                <p class="text-gray-500 font-medium">Perdambatan Mega Sunter B-40</p>
+                                <p class="text-gray-500 font-medium">Jl. Danau Sunter Selatan, Jakarta 14350</p>
                             </div>
                         </div>
-                        <div class="flex items-start space-x-6 group">
-                            <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-royal-blue text-2xl shadow-lg transition-all group-hover:bg-royal-blue group-hover:text-white">
-                                <i class="fa-solid fa-phone"></i>
+                        <div class="flex items-start space-x-8 group">
+                            <div class="w-20 h-20 bg-white rounded-[30px] flex items-center justify-center text-royal-blue text-3xl shadow-xl transition-all group-hover:bg-brand-accent group-hover:text-navy group-hover:rotate-6">
+                                <i class="fa-solid fa-phone-volume"></i>
                             </div>
                             <div>
-                                <h4 class="text-xl font-bold text-navy">Telepon & Fax</h4>
-                                <p class="text-gray-500">(+62-21) 6583 5077 - 78</p>
-                                <p class="text-gray-500">Fax: (+62-21) 6583 5079</p>
+                                <h4 class="text-2xl font-black text-navy tracking-tight mb-2">Kontak Cepat</h4>
+                                <p class="text-gray-500 font-black tracking-tight text-xl mb-1">(+62-21) 6583 5077</p>
+                                <p class="text-gray-500 font-medium">Fax: (+62-21) 6583 5079</p>
                             </div>
                         </div>
-                        <div class="flex items-start space-x-6 group">
-                            <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-royal-blue text-2xl shadow-lg transition-all group-hover:bg-royal-blue group-hover:text-white">
-                                <i class="fa-solid fa-envelope"></i>
+                        <div class="flex items-start space-x-8 group">
+                            <div class="w-20 h-20 bg-white rounded-[30px] flex items-center justify-center text-royal-blue text-3xl shadow-xl transition-all group-hover:bg-navy group-hover:text-white group-hover:rotate-6">
+                                <i class="fa-solid fa-envelope-open-text"></i>
                             </div>
                             <div>
-                                <h4 class="text-xl font-bold text-navy">Email</h4>
-                                <p class="text-gray-500">sales@suryasarana.com</p>
-                                <p class="text-gray-500">customercare@suryasarana.com</p>
+                                <h4 class="text-2xl font-black text-navy tracking-tight mb-2">Email Bisnis</h4>
+                                <p class="text-gray-500 font-medium">sales@suryasarana.com</p>
+                                <p class="text-gray-500 font-medium">support@suryasarana.com</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="bg-white p-12 rounded-[50px] shadow-3xl border border-gray-100">
+                <div class="bg-white p-16 rounded-[70px] shadow-3xl border border-gray-100 relative z-10" data-aos="fade-left">
                     <form class="space-y-8">
-                        <div class="grid md:grid-cols-2 gap-8">
-                            <div class="space-y-3">
-                                <label class="text-sm font-bold text-navy uppercase tracking-widest ml-1">Nama Lengkap</label>
-                                <input type="text" class="w-full bg-gray-50 border border-gray-200 px-6 py-4 rounded-2xl focus:outline-none focus:border-royal-blue focus:ring-4 focus:ring-royal-blue/5 transition-all" placeholder="Nama Anda">
+                        <div class="grid md:grid-cols-2 gap-10">
+                            <div class="space-y-4">
+                                <label class="text-[10px] font-black text-navy uppercase tracking-[0.3em] ml-2">Nama Lengkap</label>
+                                <input type="text" class="w-full bg-gray-50 border-2 border-gray-100 px-8 py-5 rounded-3xl focus:outline-none focus:border-royal-blue focus:ring-0 transition-all font-medium" placeholder="Nama Anda">
                             </div>
-                            <div class="space-y-3">
-                                <label class="text-sm font-bold text-navy uppercase tracking-widest ml-1">Email</label>
-                                <input type="email" class="w-full bg-gray-50 border border-gray-200 px-6 py-4 rounded-2xl focus:outline-none focus:border-royal-blue focus:ring-4 focus:ring-royal-blue/5 transition-all" placeholder="email@example.com">
+                            <div class="space-y-4">
+                                <label class="text-[10px] font-black text-navy uppercase tracking-[0.3em] ml-2">Email</label>
+                                <input type="email" class="w-full bg-gray-50 border-2 border-gray-100 px-8 py-5 rounded-3xl focus:outline-none focus:border-royal-blue focus:ring-0 transition-all font-medium" placeholder="email@domain.com">
                             </div>
                         </div>
-                        <div class="space-y-3">
-                            <label class="text-sm font-bold text-navy uppercase tracking-widest ml-1">Subjek</label>
-                            <input type="text" class="w-full bg-gray-50 border border-gray-200 px-6 py-4 rounded-2xl focus:outline-none focus:border-royal-blue focus:ring-4 focus:ring-royal-blue/5 transition-all" placeholder="Tujuan Anda">
+                        <div class="space-y-4">
+                            <label class="text-[10px] font-black text-navy uppercase tracking-[0.3em] ml-2">Layanan yang Dibutuhkan</label>
+                            <select class="w-full bg-gray-50 border-2 border-gray-100 px-8 py-5 rounded-3xl focus:outline-none focus:border-royal-blue focus:ring-0 transition-all font-medium appearance-none">
+                                <option>Smart Building Package</option>
+                                <option>Energy Monitoring</option>
+                                <option>HVAC Automation</option>
+                            </select>
                         </div>
-                        <div class="space-y-3">
-                            <label class="text-sm font-bold text-navy uppercase tracking-widest ml-1">Pesan</label>
-                            <textarea rows="4" class="w-full bg-gray-50 border border-gray-200 px-6 py-4 rounded-2xl focus:outline-none focus:border-royal-blue focus:ring-4 focus:ring-royal-blue/5 transition-all" placeholder="Ceritakan kebutuhan Anda..."></textarea>
+                        <div class="space-y-4">
+                            <label class="text-[10px] font-black text-navy uppercase tracking-[0.3em] ml-2">Pesan Singkat</label>
+                            <textarea rows="4" class="w-full bg-gray-50 border-2 border-gray-100 px-8 py-5 rounded-3xl focus:outline-none focus:border-royal-blue focus:ring-0 transition-all font-medium" placeholder="Ceritakan kebutuhan Anda..."></textarea>
                         </div>
-                        <button class="w-full bg-royal-blue text-white py-5 rounded-2xl font-bold text-lg hover:bg-blue-700 transition-all shadow-xl shadow-blue-600/20 transform hover:-translate-y-1">
+                        <button class="w-full bg-gradient-to-r from-royal-blue to-blue-600 text-white py-6 rounded-3xl font-black text-xl hover:shadow-2xl hover:shadow-blue-600/30 transition-all transform hover:-translate-y-2 active:scale-95">
                             Kirim Pesan Sekarang
                         </button>
                     </form>
@@ -728,73 +669,94 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-midnight pt-32 pb-16 text-gray-400 border-t border-gray-900/50">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-4 gap-20 mb-24">
-            <div class="space-y-10">
-                <a href="#" class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-royal-blue rounded-xl flex items-center justify-center text-white font-bold text-2xl shadow-lg shadow-blue-600/30">SSD</div>
-                    <span class="text-white font-display font-bold text-3xl tracking-tighter">SSD</span>
+    <footer class="bg-midnight pt-32 pb-16 text-gray-400 border-t border-white/5 relative overflow-hidden">
+        <div class="blob -bottom-44 -left-44 opacity-10 bg-royal-blue"></div>
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-4 gap-24 mb-32 relative z-10">
+            <div class="space-y-12">
+                <a href="#" class="flex items-center space-x-4 group">
+                    <div class="w-14 h-14 bg-gradient-to-tr from-royal-blue to-brand-accent rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-xl shadow-blue-600/30">SSD</div>
+                    <span class="text-white font-display font-black text-4xl tracking-tighter uppercase">SSD <span class="text-brand-accent">BMS</span></span>
                 </a>
-                <p class="leading-relaxed text-lg font-light">Pemimpin dalam solusi Building Management System cerdas. Kami membantu mengoptimalkan efisiensi dan kenyamanan fasilitas Anda dengan teknologi terkini.</p>
-                <div class="flex space-x-5">
-                    <a href="#" class="w-12 h-12 rounded-2xl border border-gray-800 flex items-center justify-center hover:bg-royal-blue hover:text-white transition-all transform hover:-translate-y-2"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
-                    <a href="#" class="w-12 h-12 rounded-2xl border border-gray-800 flex items-center justify-center hover:bg-royal-blue hover:text-white transition-all transform hover:-translate-y-2"><i class="fa-brands fa-instagram text-xl"></i></a>
+                <p class="leading-relaxed text-xl font-medium opacity-60">Pusat solusi manajemen gedung cerdas terdepan di Indonesia. Mengoptimalkan masa depan bangunan Anda hari ini.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="w-14 h-14 rounded-2xl border border-white/10 flex items-center justify-center hover:bg-royal-blue hover:text-white hover:border-royal-blue transition-all transform hover:-translate-y-3"><i class="fa-brands fa-linkedin-in text-2xl"></i></a>
+                    <a href="#" class="w-14 h-14 rounded-2xl border border-white/10 flex items-center justify-center hover:bg-royal-blue hover:text-white hover:border-royal-blue transition-all transform hover:-translate-y-3"><i class="fa-brands fa-instagram text-2xl"></i></a>
+                    <a href="#" class="w-14 h-14 rounded-2xl border border-white/10 flex items-center justify-center hover:bg-royal-blue hover:text-white hover:border-royal-blue transition-all transform hover:-translate-y-3"><i class="fa-brands fa-facebook-f text-2xl"></i></a>
                 </div>
             </div>
 
             <div>
-                <h4 class="text-white font-black text-sm mb-10 uppercase tracking-[0.3em]">Solusi</h4>
-                <ul class="space-y-5">
-                    <li><a href="#" class="hover:text-royal-blue transition-colors flex items-center group"><span class="w-2 h-2 bg-gray-800 rounded-full mr-3 group-hover:bg-royal-blue"></span>Energy Monitoring</a></li>
-                    <li><a href="#" class="hover:text-royal-blue transition-colors flex items-center group"><span class="w-2 h-2 bg-gray-800 rounded-full mr-3 group-hover:bg-royal-blue"></span>HVAC Automation</a></li>
-                    <li><a href="#" class="hover:text-royal-blue transition-colors flex items-center group"><span class="w-2 h-2 bg-gray-800 rounded-full mr-3 group-hover:bg-royal-blue"></span>Lighting Control</a></li>
-                    <li><a href="#" class="hover:text-royal-blue transition-colors flex items-center group"><span class="w-2 h-2 bg-gray-800 rounded-full mr-3 group-hover:bg-royal-blue"></span>Security Systems</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="text-white font-black text-sm mb-10 uppercase tracking-[0.3em]">Perusahaan</h4>
-                <ul class="space-y-5">
-                    <li><a href="#" class="hover:text-royal-blue transition-colors flex items-center group"><span class="w-2 h-2 bg-gray-800 rounded-full mr-3 group-hover:bg-royal-blue"></span>Tentang Kami</a></li>
-                    <li><a href="#" class="hover:text-royal-blue transition-colors flex items-center group"><span class="w-2 h-2 bg-gray-800 rounded-full mr-3 group-hover:bg-royal-blue"></span>Layanan</a></li>
-                    <li><a href="#" class="hover:text-royal-blue transition-colors flex items-center group"><span class="w-2 h-2 bg-gray-800 rounded-full mr-3 group-hover:bg-royal-blue"></span>Produk</a></li>
-                    <li><a href="#" class="hover:text-royal-blue transition-colors flex items-center group"><span class="w-2 h-2 bg-gray-800 rounded-full mr-3 group-hover:bg-royal-blue"></span>Kontak</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="text-white font-black text-sm mb-10 uppercase tracking-[0.3em]">Kontak</h4>
+                <h4 class="text-white font-black text-sm mb-12 uppercase tracking-[0.4em]">Solusi Utama</h4>
                 <ul class="space-y-6">
-                    <li class="flex items-start space-x-4">
-                        <div class="w-10 h-10 rounded-xl bg-gray-900 flex items-center justify-center text-royal-blue flex-shrink-0"><i class="fa-solid fa-location-dot"></i></div>
-                        <span class="text-gray-300">Jl. Danau Sunter Selatan, Jakarta 14350</span>
+                    <li><a href="#" class="hover:text-brand-accent transition-all flex items-center group font-medium"><div class="w-2 h-2 bg-gray-800 rounded-full mr-4 group-hover:bg-brand-accent transition-all"></div>Energy Monitoring</a></li>
+                    <li><a href="#" class="hover:text-brand-accent transition-all flex items-center group font-medium"><div class="w-2 h-2 bg-gray-800 rounded-full mr-4 group-hover:bg-brand-accent transition-all"></div>HVAC Automation</a></li>
+                    <li><a href="#" class="hover:text-brand-accent transition-all flex items-center group font-medium"><div class="w-2 h-2 bg-gray-800 rounded-full mr-4 group-hover:bg-brand-accent transition-all"></div>Lighting Control</a></li>
+                    <li><a href="#" class="hover:text-brand-accent transition-all flex items-center group font-medium"><div class="w-2 h-2 bg-gray-800 rounded-full mr-4 group-hover:bg-brand-accent transition-all"></div>Security & CCTV</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-black text-sm mb-12 uppercase tracking-[0.4em]">Perusahaan</h4>
+                <ul class="space-y-6">
+                    <li><a href="#" class="hover:text-brand-accent transition-all flex items-center group font-medium"><div class="w-2 h-2 bg-gray-800 rounded-full mr-4 group-hover:bg-brand-accent transition-all"></div>Tentang Kami</a></li>
+                    <li><a href="#" class="hover:text-brand-accent transition-all flex items-center group font-medium"><div class="w-2 h-2 bg-gray-800 rounded-full mr-4 group-hover:bg-brand-accent transition-all"></div>Layanan Expert</a></li>
+                    <li><a href="#" class="hover:text-brand-accent transition-all flex items-center group font-medium"><div class="w-2 h-2 bg-gray-800 rounded-full mr-4 group-hover:bg-brand-accent transition-all"></div>Produk Katalog</a></li>
+                    <li><a href="#" class="hover:text-brand-accent transition-all flex items-center group font-medium"><div class="w-2 h-2 bg-gray-800 rounded-full mr-4 group-hover:bg-brand-accent transition-all"></div>Kontak Kami</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-black text-sm mb-12 uppercase tracking-[0.4em]">Kantor Pusat</h4>
+                <ul class="space-y-8 font-medium">
+                    <li class="flex items-start space-x-5 group">
+                        <div class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-royal-blue flex-shrink-0 group-hover:bg-royal-blue group-hover:text-white transition-all"><i class="fa-solid fa-map-location-dot"></i></div>
+                        <span class="text-gray-300">Jl. Danau Sunter Selatan, Jakarta Utara, 14350</span>
                     </li>
-                    <li class="flex items-center space-x-4">
-                        <div class="w-10 h-10 rounded-xl bg-gray-900 flex items-center justify-center text-royal-blue flex-shrink-0"><i class="fa-solid fa-phone"></i></div>
-                        <span class="text-gray-300">(+62-21) 6583 5077</span>
-                    </li>
-                    <li class="flex items-center space-x-4">
-                        <div class="w-10 h-10 rounded-xl bg-gray-900 flex items-center justify-center text-royal-blue flex-shrink-0"><i class="fa-solid fa-envelope"></i></div>
-                        <span class="text-gray-300">sales@suryasarana.com</span>
+                    <li class="flex items-center space-x-5 group">
+                        <div class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-brand-accent flex-shrink-0 group-hover:bg-brand-accent group-hover:text-navy transition-all"><i class="fa-solid fa-phone"></i></div>
+                        <span class="text-gray-300 font-black tracking-tight text-lg">(+62-21) 6583 5077</span>
                     </li>
                 </ul>
             </div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-6 pt-16 border-t border-gray-900/50 text-center flex flex-col md:flex-row items-center justify-between gap-6">
-            <p class="text-sm font-medium">&copy; 2026 PT Surya Sarana Dinamika. All Rights Reserved.</p>
-            <div class="flex space-x-8 text-xs font-bold uppercase tracking-widest">
-                <a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a>
-                <a href="#" class="hover:text-white transition-colors">Syarat & Ketentuan</a>
+        <div class="max-w-7xl mx-auto px-6 pt-16 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-10">
+            <p class="text-sm font-bold tracking-tight">&copy; 2026 PT SURYA SARANA DINAMIKA. ALL RIGHTS RESERVED.</p>
+            <div class="flex space-x-12 text-[10px] font-black uppercase tracking-[0.3em]">
+                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                <a href="#" class="hover:text-white transition-colors">Cookie Policy</a>
             </div>
         </div>
     </footer>
 
     <!-- Floating WhatsApp Button -->
-    <a href="#" class="fixed bottom-10 right-10 w-20 h-20 bg-[#25D366] text-white rounded-[28px] flex items-center justify-center text-4xl shadow-3xl hover:scale-110 active:scale-95 transition-all z-50 group">
+    <a href="#" class="fixed bottom-8 right-8 w-16 h-16 md:w-24 md:h-24 bg-[#25D366] text-white rounded-[25px] md:rounded-[35px] flex items-center justify-center text-3xl md:text-5xl shadow-3xl hover:scale-110 active:scale-90 transition-all z-50 group border-4 border-white">
         <i class="fa-brands fa-whatsapp group-hover:rotate-12 transition-transform"></i>
-        <span class="absolute right-full mr-4 bg-white text-navy px-4 py-2 rounded-xl text-sm font-bold opacity-0 group-hover:opacity-100 transition-all shadow-xl pointer-events-none whitespace-nowrap">Chat dengan kami</span>
+        <span class="absolute right-full mr-6 bg-white text-navy px-6 py-3 rounded-2xl text-sm font-black shadow-2xl opacity-0 group-hover:opacity-100 transition-all pointer-events-none whitespace-nowrap border-2 border-gray-100">Konsultasi Gratis</span>
     </a>
+
+    <!-- AOS Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100,
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('mainNav');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2', 'shadow-2xl');
+                nav.classList.remove('py-4');
+            } else {
+                nav.classList.add('py-4');
+                nav.classList.remove('py-2', 'shadow-2xl');
+            }
+        });
+    </script>
 
 </body>
 
