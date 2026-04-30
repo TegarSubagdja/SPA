@@ -37,116 +37,153 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .glass-dark {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(12px);
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .hero-gradient {
-            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.15), transparent),
-                        radial-gradient(circle at bottom left, rgba(37, 99, 235, 0.1), transparent);
+            background: radial-gradient(circle at 70% 30%, rgba(37, 99, 235, 0.2), transparent 50%),
+                        radial-gradient(circle at 20% 70%, rgba(37, 99, 235, 0.15), transparent 50%);
         }
         .card-hover:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+        }
+        .nav-link-hover {
+            position: relative;
+        }
+        .nav-link-hover::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #2563eb;
+            transition: width 0.3s ease;
+        }
+        .nav-link-hover:hover::after {
+            width: 100%;
         }
     </style>
 </head>
 
-<body class="font-sans bg-white text-navy overflow-x-hidden">
+<body class="font-sans bg-white text-navy overflow-x-hidden antialiased">
 
     <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 transition-all duration-300 glass-dark">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="flex items-center space-x-2">
-                <div class="w-10 h-10 bg-royal-blue rounded-lg flex items-center justify-center text-white font-bold text-xl">B</div>
-                <span class="text-white font-display font-bold text-2xl tracking-tighter">BMS</span>
+            <a href="#" class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-royal-blue rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-600/30">B</div>
+                <span class="text-white font-display font-bold text-2xl tracking-tight">BMS</span>
             </a>
             
-            <div class="hidden lg:flex items-center space-x-8">
-                <a href="#home" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Home</a>
-                <a href="#solutions" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Solutions</a>
-                <a href="#industries" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Industries</a>
-                <a href="#" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Technology</a>
-                <a href="#" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Projects</a>
-                <a href="#" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Services</a>
-                <a href="#" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">Resources</a>
-                <a href="#" class="text-gray-300 hover:text-white transition-colors text-sm font-medium">About Us</a>
+            <div class="hidden lg:flex items-center space-x-10">
+                <a href="#home" class="text-gray-300 hover:text-white transition-colors text-sm font-semibold tracking-wide nav-link-hover uppercase">Home</a>
+                <a href="#solutions" class="text-gray-300 hover:text-white transition-colors text-sm font-semibold tracking-wide nav-link-hover uppercase">Solutions</a>
+                <a href="#industries" class="text-gray-300 hover:text-white transition-colors text-sm font-semibold tracking-wide nav-link-hover uppercase">Industries</a>
+                <a href="#" class="text-gray-300 hover:text-white transition-colors text-sm font-semibold tracking-wide nav-link-hover uppercase">Technology</a>
+                <a href="#" class="text-gray-300 hover:text-white transition-colors text-sm font-semibold tracking-wide nav-link-hover uppercase">About Us</a>
             </div>
 
-            <a href="#contact" class="bg-royal-blue hover:bg-blue-700 text-white px-6 py-2.5 rounded-full font-semibold transition-all shadow-lg shadow-blue-900/20">
+            <a href="#contact" class="hidden sm:block bg-royal-blue hover:bg-blue-700 text-white px-8 py-3 rounded-full font-bold transition-all transform hover:scale-105 shadow-xl shadow-blue-600/20">
                 Contact Us
             </a>
+            
+            <!-- Mobile Toggle -->
+            <button class="lg:hidden text-white text-2xl">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen bg-midnight pt-32 pb-48 flex items-center overflow-hidden">
+    <section id="home" class="relative min-h-screen bg-midnight pt-40 pb-56 flex items-center overflow-hidden">
         <div class="absolute inset-0 hero-gradient"></div>
-        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
         
-        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
-            <div class="space-y-8 animate-in fade-in slide-in-from-left duration-1000">
-                <span class="text-royal-blue font-bold tracking-[0.2em] text-sm bg-blue-900/30 px-4 py-1.5 rounded-full">SMART CONTROL • REALTIME MONITORING</span>
-                <h1 class="text-white font-display font-extrabold text-5xl lg:text-7xl leading-tight">
-                    SMART BUILDING <br> <span class="text-light-blue">INTELLIGENT SOLUTION</span>
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+            <div class="space-y-10 text-center lg:text-left">
+                <div class="inline-flex items-center space-x-3 bg-blue-900/30 border border-blue-800/50 px-4 py-2 rounded-full">
+                    <span class="w-2 h-2 bg-light-blue rounded-full animate-pulse"></span>
+                    <span class="text-light-blue font-bold tracking-[0.2em] text-xs uppercase">Smart Control • Realtime Monitoring</span>
+                </div>
+                
+                <h1 class="text-white font-display font-extrabold text-5xl md:text-6xl lg:text-7xl leading-[1.1]">
+                    SMART BUILDING <br> <span class="text-royal-blue">INTELLIGENT SOLUTION</span>
                 </h1>
-                <p class="text-gray-400 text-lg max-w-xl leading-relaxed">
-                    Unlock the full potential of your facility with our advanced Building Management System. Integrating lighting, HVAC, security, and energy usage into one seamless platform.
+                
+                <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+                    Transform your facility into a high-performance environment with our integrated Building Management System. Seamlessly connect HVAC, lighting, and security.
                 </p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="#" class="bg-royal-blue hover:bg-blue-700 text-white px-8 py-4 rounded-full font-bold flex items-center space-x-2 transition-all group shadow-xl shadow-blue-600/20">
+                
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6">
+                    <a href="#" class="w-full sm:w-auto bg-royal-blue hover:bg-blue-700 text-white px-10 py-5 rounded-full font-bold flex items-center justify-center space-x-3 transition-all transform hover:scale-105 shadow-2xl shadow-blue-600/40 group">
                         <span>Request Demo</span>
                         <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                     </a>
-                    <a href="#solutions" class="border border-gray-600 hover:border-white text-white px-8 py-4 rounded-full font-bold transition-all">
+                    <a href="#solutions" class="w-full sm:w-auto border border-gray-700 hover:border-white text-white px-10 py-5 rounded-full font-bold transition-all flex items-center justify-center">
                         See Solutions
                     </a>
                 </div>
             </div>
 
-            <div class="relative lg:h-[600px] flex items-center justify-center animate-in fade-in zoom-in duration-1000 delay-300">
-                <div class="absolute w-full h-full bg-royal-blue/10 blur-[100px] rounded-full"></div>
-                <img src="bms_hero_dashboard_3d_1777535855675.png" alt="BMS Dashboard Illustration" class="relative z-10 w-full drop-shadow-2xl hover:scale-105 transition-transform duration-700">
+            <div class="relative flex items-center justify-center">
+                <div class="absolute w-full h-full bg-royal-blue/20 blur-[120px] rounded-full"></div>
+                <div class="relative z-10 w-full max-w-[600px] rounded-[40px] overflow-hidden border border-white/10 shadow-2xl transform hover:rotate-2 transition-transform duration-700">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200" alt="Smart Building Night" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-midnight/80 to-transparent"></div>
+                    <!-- Stats Overlay -->
+                    <div class="absolute bottom-8 left-8 right-8 flex justify-between items-end">
+                        <div class="glass p-4 rounded-2xl">
+                            <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Efficiency</p>
+                            <p class="text-2xl font-bold text-white">98.4%</p>
+                        </div>
+                        <div class="glass p-4 rounded-2xl text-right">
+                            <i class="fa-solid fa-chart-line text-light-blue text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Quick Info Bar -->
         <div class="absolute bottom-12 left-1/2 -translate-x-1/2 w-full max-w-6xl px-6">
-            <div class="glass p-8 rounded-[40px] grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="flex items-center space-x-4 text-white group cursor-default">
-                    <div class="w-12 h-12 rounded-xl bg-royal-blue/20 flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all">
-                        <i class="fa-solid fa-bolt text-xl"></i>
+            <div class="glass p-10 rounded-[50px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+                <div class="flex items-center space-x-5 text-white group cursor-default">
+                    <div class="w-14 h-14 rounded-2xl bg-royal-blue/10 flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all shadow-inner">
+                        <i class="fa-solid fa-bolt-lightning text-2xl"></i>
                     </div>
                     <div>
-                        <p class="text-xs text-gray-400 font-bold uppercase tracking-wider">Energy</p>
-                        <p class="font-bold">Efficiency</p>
+                        <p class="text-[10px] text-gray-400 font-black uppercase tracking-widest leading-none mb-1">Energy</p>
+                        <p class="font-bold text-lg tracking-tight">Efficiency</p>
                     </div>
                 </div>
-                <div class="flex items-center space-x-4 text-white group cursor-default">
-                    <div class="w-12 h-12 rounded-xl bg-royal-blue/20 flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all">
-                        <i class="fa-solid fa-gauge-high text-xl"></i>
+                <div class="flex items-center space-x-5 text-white group cursor-default">
+                    <div class="w-14 h-14 rounded-2xl bg-royal-blue/10 flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all shadow-inner">
+                        <i class="fa-solid fa-tower-broadcast text-2xl"></i>
                     </div>
                     <div>
-                        <p class="text-xs text-gray-400 font-bold uppercase tracking-wider">Real-time</p>
-                        <p class="font-bold">Monitoring</p>
+                        <p class="text-[10px] text-gray-400 font-black uppercase tracking-widest leading-none mb-1">Real-time</p>
+                        <p class="font-bold text-lg tracking-tight">Monitoring</p>
                     </div>
                 </div>
-                <div class="flex items-center space-x-4 text-white group cursor-default">
-                    <div class="w-12 h-12 rounded-xl bg-royal-blue/20 flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all">
-                        <i class="fa-solid fa-microchip text-xl"></i>
+                <div class="flex items-center space-x-5 text-white group cursor-default">
+                    <div class="w-14 h-14 rounded-2xl bg-royal-blue/10 flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all shadow-inner">
+                        <i class="fa-solid fa-shield-halved text-2xl"></i>
                     </div>
                     <div>
-                        <p class="text-xs text-gray-400 font-bold uppercase tracking-wider">Centralized</p>
-                        <p class="font-bold">Control</p>
+                        <p class="text-[10px] text-gray-400 font-black uppercase tracking-widest leading-none mb-1">Centralized</p>
+                        <p class="font-bold text-lg tracking-tight">Control</p>
                     </div>
                 </div>
-                <div class="flex items-center space-x-4 text-white group cursor-default">
-                    <div class="w-12 h-12 rounded-xl bg-royal-blue/20 flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all">
-                        <i class="fa-solid fa-robot text-xl"></i>
+                <div class="flex items-center space-x-5 text-white group cursor-default">
+                    <div class="w-14 h-14 rounded-2xl bg-royal-blue/10 flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all shadow-inner">
+                        <i class="fa-solid fa-gears text-2xl"></i>
                     </div>
                     <div>
-                        <p class="text-xs text-gray-400 font-bold uppercase tracking-wider">Smart</p>
-                        <p class="font-bold">Automation</p>
+                        <p class="text-[10px] text-gray-400 font-black uppercase tracking-widest leading-none mb-1">Smart</p>
+                        <p class="font-bold text-lg tracking-tight">Automation</p>
                     </div>
                 </div>
             </div>
@@ -156,116 +193,123 @@
     <!-- Solutions Section -->
     <section id="solutions" class="py-32 bg-white">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center space-y-4 mb-20">
-                <h2 class="text-4xl lg:text-5xl font-display font-extrabold text-navy">Solusi Terintegrasi untuk <br>Manajemen Gedung Modern</h2>
-                <div class="w-24 h-1.5 bg-royal-blue mx-auto rounded-full"></div>
+            <div class="text-center space-y-6 mb-24 max-w-3xl mx-auto">
+                <span class="text-royal-blue font-bold tracking-widest text-sm uppercase bg-blue-50 px-5 py-2 rounded-full italic">Layanan Unggulan</span>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold text-navy leading-tight">Solusi Terintegrasi untuk <br><span class="text-royal-blue underline decoration-4 underline-offset-8">Manajemen Gedung</span></h2>
+                <p class="text-gray-500 text-lg">Kami menghadirkan teknologi masa depan untuk mengelola setiap aspek infrastruktur Anda secara efisien dan aman.</p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
                 <!-- Card 1 -->
-                <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 transition-all card-hover group">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=800" alt="Energy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute bottom-4 left-6 bg-royal-blue text-white w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg -mb-10 group-hover:mb-0 transition-all duration-500">
-                            <i class="fa-solid fa-leaf text-2xl"></i>
+                <div class="bg-white rounded-[40px] overflow-hidden border border-gray-100 transition-all card-hover group shadow-sm">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=800" alt="Energy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
+                        <div class="absolute inset-0 bg-navy/20 group-hover:bg-navy/0 transition-all duration-700"></div>
+                        <div class="absolute -bottom-8 left-10 bg-royal-blue text-white w-20 h-20 rounded-3xl flex items-center justify-center shadow-2xl group-hover:-translate-y-12 transition-all duration-700">
+                            <i class="fa-solid fa-leaf text-3xl"></i>
                         </div>
                     </div>
-                    <div class="p-8 pt-12 space-y-4">
-                        <h3 class="text-2xl font-display font-bold">Energy Management</h3>
-                        <p class="text-gray-500">Monitor and optimize power consumption across your entire facility in real-time.</p>
-                        <a href="#" class="inline-flex items-center text-royal-blue font-bold group">
-                            <span>Learn More</span>
-                            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    <div class="p-10 pt-16 space-y-5">
+                        <h3 class="text-2xl md:text-3xl font-display font-bold text-navy">Energy Management</h3>
+                        <p class="text-gray-500 leading-relaxed">Optimize energy consumption and reduce operational costs with intelligent monitoring and predictive analytics.</p>
+                        <a href="#" class="inline-flex items-center text-royal-blue font-black group py-2">
+                            <span class="tracking-widest uppercase text-xs">Learn More</span>
+                            <i class="fa-solid fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Card 2 -->
-                <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 transition-all card-hover group">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ecb?auto=format&fit=crop&q=80&w=800" alt="HVAC" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute bottom-4 left-6 bg-cyan-500 text-white w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg -mb-10 group-hover:mb-0 transition-all duration-500">
-                            <i class="fa-solid fa-wind text-2xl"></i>
+                <div class="bg-white rounded-[40px] overflow-hidden border border-gray-100 transition-all card-hover group shadow-sm">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ecb?auto=format&fit=crop&q=80&w=800" alt="HVAC" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
+                        <div class="absolute inset-0 bg-navy/20 group-hover:bg-navy/0 transition-all duration-700"></div>
+                        <div class="absolute -bottom-8 left-10 bg-cyan-500 text-white w-20 h-20 rounded-3xl flex items-center justify-center shadow-2xl group-hover:-translate-y-12 transition-all duration-700">
+                            <i class="fa-solid fa-temperature-half text-3xl"></i>
                         </div>
                     </div>
-                    <div class="p-8 pt-12 space-y-4">
-                        <h3 class="text-2xl font-display font-bold">HVAC Control</h3>
-                        <p class="text-gray-500">Intelligent climate control systems that adapt to occupancy and external conditions.</p>
-                        <a href="#" class="inline-flex items-center text-royal-blue font-bold group">
-                            <span>Learn More</span>
-                            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    <div class="p-10 pt-16 space-y-5">
+                        <h3 class="text-2xl md:text-3xl font-display font-bold text-navy">HVAC Control</h3>
+                        <p class="text-gray-500 leading-relaxed">Ensure occupant comfort while maximizing efficiency through automated climate and ventilation management.</p>
+                        <a href="#" class="inline-flex items-center text-royal-blue font-black group py-2">
+                            <span class="tracking-widest uppercase text-xs">Learn More</span>
+                            <i class="fa-solid fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Card 3 -->
-                <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 transition-all card-hover group">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&q=80&w=800" alt="Lighting" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute bottom-4 left-6 bg-amber-400 text-white w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg -mb-10 group-hover:mb-0 transition-all duration-500">
-                            <i class="fa-solid fa-lightbulb text-2xl"></i>
+                <div class="bg-white rounded-[40px] overflow-hidden border border-gray-100 transition-all card-hover group shadow-sm">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&q=80&w=800" alt="Lighting" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
+                        <div class="absolute inset-0 bg-navy/20 group-hover:bg-navy/0 transition-all duration-700"></div>
+                        <div class="absolute -bottom-8 left-10 bg-amber-400 text-white w-20 h-20 rounded-3xl flex items-center justify-center shadow-2xl group-hover:-translate-y-12 transition-all duration-700">
+                            <i class="fa-solid fa-lightbulb text-3xl"></i>
                         </div>
                     </div>
-                    <div class="p-8 pt-12 space-y-4">
-                        <h3 class="text-2xl font-display font-bold">Smart Lighting</h3>
-                        <p class="text-gray-500">Automated lighting solutions with daylight harvesting and presence detection.</p>
-                        <a href="#" class="inline-flex items-center text-royal-blue font-bold group">
-                            <span>Learn More</span>
-                            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    <div class="p-10 pt-16 space-y-5">
+                        <h3 class="text-2xl md:text-3xl font-display font-bold text-navy">Smart Lighting</h3>
+                        <p class="text-gray-500 leading-relaxed">Adaptive lighting systems that adjust based on occupancy and natural light levels to save energy costs.</p>
+                        <a href="#" class="inline-flex items-center text-royal-blue font-black group py-2">
+                            <span class="tracking-widest uppercase text-xs">Learn More</span>
+                            <i class="fa-solid fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Card 4 -->
-                <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 transition-all card-hover group">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1557597774-9d2739f8ff19?auto=format&fit=crop&q=80&w=800" alt="Security" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute bottom-4 left-6 bg-red-500 text-white w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg -mb-10 group-hover:mb-0 transition-all duration-500">
-                            <i class="fa-solid fa-shield-halved text-2xl"></i>
+                <div class="bg-white rounded-[40px] overflow-hidden border border-gray-100 transition-all card-hover group shadow-sm">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1557597774-9d2739f8ff19?auto=format&fit=crop&q=80&w=800" alt="Security" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
+                        <div class="absolute inset-0 bg-navy/20 group-hover:bg-navy/0 transition-all duration-700"></div>
+                        <div class="absolute -bottom-8 left-10 bg-red-500 text-white w-20 h-20 rounded-3xl flex items-center justify-center shadow-2xl group-hover:-translate-y-12 transition-all duration-700">
+                            <i class="fa-solid fa-shield-virus text-3xl"></i>
                         </div>
                     </div>
-                    <div class="p-8 pt-12 space-y-4">
-                        <h3 class="text-2xl font-display font-bold">Security Systems</h3>
-                        <p class="text-gray-500">Integrated CCTV, access control, and visitor management in one dashboard.</p>
-                        <a href="#" class="inline-flex items-center text-royal-blue font-bold group">
-                            <span>Learn More</span>
-                            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    <div class="p-10 pt-16 space-y-5">
+                        <h3 class="text-2xl md:text-3xl font-display font-bold text-navy">Security Systems</h3>
+                        <p class="text-gray-500 leading-relaxed">Integrated surveillance and access control for a safer, more secure building environment for everyone.</p>
+                        <a href="#" class="inline-flex items-center text-royal-blue font-black group py-2">
+                            <span class="tracking-widest uppercase text-xs">Learn More</span>
+                            <i class="fa-solid fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Card 5 -->
-                <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 transition-all card-hover group">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1563911302283-d2bc129e7570?auto=format&fit=crop&q=80&w=800" alt="Fire" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute bottom-4 left-6 bg-orange-600 text-white w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg -mb-10 group-hover:mb-0 transition-all duration-500">
-                            <i class="fa-solid fa-fire-extinguisher text-2xl"></i>
+                <div class="bg-white rounded-[40px] overflow-hidden border border-gray-100 transition-all card-hover group shadow-sm">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1563911302283-d2bc129e7570?auto=format&fit=crop&q=80&w=800" alt="Fire" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
+                        <div class="absolute inset-0 bg-navy/20 group-hover:bg-navy/0 transition-all duration-700"></div>
+                        <div class="absolute -bottom-8 left-10 bg-orange-600 text-white w-20 h-20 rounded-3xl flex items-center justify-center shadow-2xl group-hover:-translate-y-12 transition-all duration-700">
+                            <i class="fa-solid fa-fire text-3xl"></i>
                         </div>
                     </div>
-                    <div class="p-8 pt-12 space-y-4">
-                        <h3 class="text-2xl font-display font-bold">Fire Protection</h3>
-                        <p class="text-gray-500">Advanced detection and suppression systems with automated emergency protocols.</p>
-                        <a href="#" class="inline-flex items-center text-royal-blue font-bold group">
-                            <span>Learn More</span>
-                            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    <div class="p-10 pt-16 space-y-5">
+                        <h3 class="text-2xl md:text-3xl font-display font-bold text-navy">Fire Protection</h3>
+                        <p class="text-gray-500 leading-relaxed">State-of-the-art detection and emergency response systems to protect assets and human lives 24/7.</p>
+                        <a href="#" class="inline-flex items-center text-royal-blue font-black group py-2">
+                            <span class="tracking-widest uppercase text-xs">Learn More</span>
+                            <i class="fa-solid fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Card 6 -->
-                <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 transition-all card-hover group">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&q=80&w=800" alt="Parking" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute bottom-4 left-6 bg-indigo-500 text-white w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg -mb-10 group-hover:mb-0 transition-all duration-500">
-                            <i class="fa-solid fa-car-rear text-2xl"></i>
+                <div class="bg-white rounded-[40px] overflow-hidden border border-gray-100 transition-all card-hover group shadow-sm">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&q=80&w=800" alt="Parking" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
+                        <div class="absolute inset-0 bg-navy/20 group-hover:bg-navy/0 transition-all duration-700"></div>
+                        <div class="absolute -bottom-8 left-10 bg-indigo-500 text-white w-20 h-20 rounded-3xl flex items-center justify-center shadow-2xl group-hover:-translate-y-12 transition-all duration-700">
+                            <i class="fa-solid fa-square-parking text-3xl"></i>
                         </div>
                     </div>
-                    <div class="p-8 pt-12 space-y-4">
-                        <h3 class="text-2xl font-display font-bold">Smart Parking</h3>
-                        <p class="text-gray-500">Efficient space management and guidance systems to improve visitor experience.</p>
-                        <a href="#" class="inline-flex items-center text-royal-blue font-bold group">
-                            <span>Learn More</span>
-                            <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    <div class="p-10 pt-16 space-y-5">
+                        <h3 class="text-2xl md:text-3xl font-display font-bold text-navy">Smart Parking</h3>
+                        <p class="text-gray-500 leading-relaxed">Advanced parking guidance and management systems to enhance space utilization and user experience.</p>
+                        <a href="#" class="inline-flex items-center text-royal-blue font-black group py-2">
+                            <span class="tracking-widest uppercase text-xs">Learn More</span>
+                            <i class="fa-solid fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
                         </a>
                     </div>
                 </div>
@@ -274,44 +318,62 @@
     </section>
 
     <!-- Dashboard Preview Section -->
-    <section class="py-24 bg-gray-50">
+    <section class="py-24 bg-gray-50 overflow-hidden">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="bg-navy rounded-[60px] overflow-hidden p-12 lg:p-24 grid lg:grid-cols-2 gap-16 items-center">
-                <div class="space-y-10">
-                    <h2 class="text-white text-4xl lg:text-5xl font-display font-bold leading-tight">Advanced Dashboard & Analytics</h2>
-                    <p class="text-gray-400 text-lg">Experience complete control with our intuitive web-based interface designed for modern facility managers.</p>
+            <div class="bg-navy rounded-[80px] p-12 lg:p-24 grid lg:grid-cols-2 gap-20 items-center relative shadow-3xl shadow-navy/20">
+                <div class="absolute -top-24 -right-24 w-96 h-96 bg-royal-blue/10 blur-[120px] rounded-full"></div>
+                
+                <div class="space-y-12 relative z-10">
+                    <div class="space-y-6">
+                        <h2 class="text-white text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-[1.1]">Control Your Space <br><span class="text-royal-blue">Anywhere, Anytime.</span></h2>
+                        <p class="text-gray-400 text-xl font-light">Intuitive dashboard designed for deep analytics and centralized management of your entire building portfolio.</p>
+                    </div>
                     
-                    <ul class="space-y-6">
-                        <li class="flex items-center space-x-4 text-white">
-                            <div class="w-8 h-8 bg-royal-blue rounded-full flex items-center justify-center text-white">
-                                <i class="fa-solid fa-check"></i>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <li class="flex items-start space-x-5 text-white">
+                            <div class="w-10 h-10 bg-royal-blue/20 rounded-xl flex items-center justify-center text-royal-blue shadow-inner mt-1">
+                                <i class="fa-solid fa-check-double text-lg"></i>
                             </div>
-                            <span class="text-lg font-medium">Real-time status of all subsystems</span>
+                            <div>
+                                <h4 class="font-bold text-lg">Central Dashboard</h4>
+                                <p class="text-gray-500 text-sm">Unified view of all assets.</p>
+                            </div>
                         </li>
-                        <li class="flex items-center space-x-4 text-white">
-                            <div class="w-8 h-8 bg-royal-blue rounded-full flex items-center justify-center text-white">
-                                <i class="fa-solid fa-check"></i>
+                        <li class="flex items-start space-x-5 text-white">
+                            <div class="w-10 h-10 bg-royal-blue/20 rounded-xl flex items-center justify-center text-royal-blue shadow-inner mt-1">
+                                <i class="fa-solid fa-chart-pie text-lg"></i>
                             </div>
-                            <span class="text-lg font-medium">Historical data & trend analysis</span>
+                            <div>
+                                <h4 class="font-bold text-lg">Predictive Data</h4>
+                                <p class="text-gray-500 text-sm">AI-driven analytics.</p>
+                            </div>
                         </li>
-                        <li class="flex items-center space-x-4 text-white">
-                            <div class="w-8 h-8 bg-royal-blue rounded-full flex items-center justify-center text-white">
-                                <i class="fa-solid fa-check"></i>
+                        <li class="flex items-start space-x-5 text-white">
+                            <div class="w-10 h-10 bg-royal-blue/20 rounded-xl flex items-center justify-center text-royal-blue shadow-inner mt-1">
+                                <i class="fa-solid fa-bell-slash text-lg"></i>
                             </div>
-                            <span class="text-lg font-medium">Customizable automated alerts</span>
+                            <div>
+                                <h4 class="font-bold text-lg">Automated Alerts</h4>
+                                <p class="text-gray-500 text-sm">Instant failure detection.</p>
+                            </div>
                         </li>
-                        <li class="flex items-center space-x-4 text-white">
-                            <div class="w-8 h-8 bg-royal-blue rounded-full flex items-center justify-center text-white">
-                                <i class="fa-solid fa-check"></i>
+                        <li class="flex items-start space-x-5 text-white">
+                            <div class="w-10 h-10 bg-royal-blue/20 rounded-xl flex items-center justify-center text-royal-blue shadow-inner mt-1">
+                                <i class="fa-solid fa-mobile-screen-button text-lg"></i>
                             </div>
-                            <span class="text-lg font-medium">Mobile-first responsive interface</span>
+                            <div>
+                                <h4 class="font-bold text-lg">Mobile Access</h4>
+                                <p class="text-gray-500 text-sm">iOS & Android compatible.</p>
+                            </div>
                         </li>
                     </ul>
                 </div>
                 
                 <div class="relative group">
-                    <div class="absolute inset-0 bg-royal-blue/20 blur-[60px] group-hover:blur-[80px] transition-all"></div>
-                    <img src="bms_dashboard_mockup_1777535936905.png" alt="Dashboard Mockup" class="relative z-10 w-full rounded-2xl shadow-2xl border border-white/10 group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-royal-blue/20 blur-[80px] rounded-full group-hover:blur-[100px] transition-all"></div>
+                    <div class="relative z-10 rounded-[40px] overflow-hidden border border-white/10 shadow-4xl transform group-hover:scale-[1.03] transition-all duration-700">
+                        <img src="https://images.unsplash.com/photo-1551288049-bbbda5366a7a?auto=format&fit=crop&q=80&w=1200" alt="Dashboard Preview" class="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all">
+                    </div>
                 </div>
             </div>
         </div>
@@ -320,44 +382,47 @@
     <!-- Industries Section -->
     <section id="industries" class="py-32 bg-white">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="text-4xl lg:text-5xl font-display font-extrabold text-navy mb-20">Solusi untuk Berbagai Industri</h2>
+            <div class="space-y-4 mb-24">
+                <h2 class="text-4xl md:text-5xl font-display font-extrabold text-navy">Solusi untuk Berbagai Industri</h2>
+                <div class="w-20 h-1.5 bg-royal-blue mx-auto rounded-full"></div>
+            </div>
             
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12">
-                <div class="group cursor-default">
-                    <div class="w-24 h-24 mx-auto mb-6 bg-gray-50 rounded-3xl flex items-center justify-center text-gray-400 group-hover:bg-royal-blue group-hover:text-white transition-all transform group-hover:rotate-6">
-                        <i class="fa-solid fa-building text-4xl"></i>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10">
+                <div class="group p-8 rounded-[30px] hover:bg-gray-50 transition-all cursor-default">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gray-50 rounded-[20px] flex items-center justify-center text-gray-400 group-hover:bg-royal-blue group-hover:text-white group-hover:rotate-12 transition-all duration-500 shadow-sm group-hover:shadow-xl group-hover:shadow-blue-600/30">
+                        <i class="fa-solid fa-building-user text-3xl"></i>
                     </div>
-                    <p class="font-bold text-lg">Office</p>
+                    <p class="font-bold text-lg text-navy">Office</p>
                 </div>
-                <div class="group cursor-default">
-                    <div class="w-24 h-24 mx-auto mb-6 bg-gray-50 rounded-3xl flex items-center justify-center text-gray-400 group-hover:bg-royal-blue group-hover:text-white transition-all transform group-hover:rotate-6">
-                        <i class="fa-solid fa-graduation-cap text-4xl"></i>
+                <div class="group p-8 rounded-[30px] hover:bg-gray-50 transition-all cursor-default">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gray-50 rounded-[20px] flex items-center justify-center text-gray-400 group-hover:bg-royal-blue group-hover:text-white group-hover:rotate-12 transition-all duration-500 shadow-sm group-hover:shadow-xl group-hover:shadow-blue-600/30">
+                        <i class="fa-solid fa-school text-3xl"></i>
                     </div>
-                    <p class="font-bold text-lg">Campus</p>
+                    <p class="font-bold text-lg text-navy">Campus</p>
                 </div>
-                <div class="group cursor-default">
-                    <div class="w-24 h-24 mx-auto mb-6 bg-gray-50 rounded-3xl flex items-center justify-center text-gray-400 group-hover:bg-royal-blue group-hover:text-white transition-all transform group-hover:rotate-6">
-                        <i class="fa-solid fa-hospital text-4xl"></i>
+                <div class="group p-8 rounded-[30px] hover:bg-gray-50 transition-all cursor-default">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gray-50 rounded-[20px] flex items-center justify-center text-gray-400 group-hover:bg-royal-blue group-hover:text-white group-hover:rotate-12 transition-all duration-500 shadow-sm group-hover:shadow-xl group-hover:shadow-blue-600/30">
+                        <i class="fa-solid fa-hospital-user text-3xl"></i>
                     </div>
-                    <p class="font-bold text-lg">Hospital</p>
+                    <p class="font-bold text-lg text-navy">Hospital</p>
                 </div>
-                <div class="group cursor-default">
-                    <div class="w-24 h-24 mx-auto mb-6 bg-gray-50 rounded-3xl flex items-center justify-center text-gray-400 group-hover:bg-royal-blue group-hover:text-white transition-all transform group-hover:rotate-6">
-                        <i class="fa-solid fa-industry text-4xl"></i>
+                <div class="group p-8 rounded-[30px] hover:bg-gray-50 transition-all cursor-default">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gray-50 rounded-[20px] flex items-center justify-center text-gray-400 group-hover:bg-royal-blue group-hover:text-white group-hover:rotate-12 transition-all duration-500 shadow-sm group-hover:shadow-xl group-hover:shadow-blue-600/30">
+                        <i class="fa-solid fa-gears text-3xl"></i>
                     </div>
-                    <p class="font-bold text-lg">Factory</p>
+                    <p class="font-bold text-lg text-navy">Factory</p>
                 </div>
-                <div class="group cursor-default">
-                    <div class="w-24 h-24 mx-auto mb-6 bg-gray-50 rounded-3xl flex items-center justify-center text-gray-400 group-hover:bg-royal-blue group-hover:text-white transition-all transform group-hover:rotate-6">
-                        <i class="fa-solid fa-server text-4xl"></i>
+                <div class="group p-8 rounded-[30px] hover:bg-gray-50 transition-all cursor-default">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gray-50 rounded-[20px] flex items-center justify-center text-gray-400 group-hover:bg-royal-blue group-hover:text-white group-hover:rotate-12 transition-all duration-500 shadow-sm group-hover:shadow-xl group-hover:shadow-blue-600/30">
+                        <i class="fa-solid fa-database text-3xl"></i>
                     </div>
-                    <p class="font-bold text-lg">Data Center</p>
+                    <p class="font-bold text-lg text-navy">Data Center</p>
                 </div>
-                <div class="group cursor-default">
-                    <div class="w-24 h-24 mx-auto mb-6 bg-gray-50 rounded-3xl flex items-center justify-center text-gray-400 group-hover:bg-royal-blue group-hover:text-white transition-all transform group-hover:rotate-6">
-                        <i class="fa-solid fa-store text-4xl"></i>
+                <div class="group p-8 rounded-[30px] hover:bg-gray-50 transition-all cursor-default">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gray-50 rounded-[20px] flex items-center justify-center text-gray-400 group-hover:bg-royal-blue group-hover:text-white group-hover:rotate-12 transition-all duration-500 shadow-sm group-hover:shadow-xl group-hover:shadow-blue-600/30">
+                        <i class="fa-solid fa-shop text-3xl"></i>
                     </div>
-                    <p class="font-bold text-lg">Mall</p>
+                    <p class="font-bold text-lg text-navy">Mall</p>
                 </div>
             </div>
         </div>
@@ -365,91 +430,100 @@
 
     <!-- CTA Section -->
     <section class="py-20 px-6">
-        <div class="max-w-7xl mx-auto bg-royal-blue rounded-[40px] p-12 lg:p-20 flex flex-col lg:flex-row items-center justify-between gap-12 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto bg-royal-blue rounded-[60px] p-12 lg:p-24 flex flex-col lg:flex-row items-center justify-between gap-16 relative overflow-hidden shadow-4xl shadow-blue-600/30">
             <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
+            <div class="absolute top-0 right-0 w-96 h-96 bg-white/10 blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2"></div>
             
-            <div class="relative z-10 text-white space-y-4">
-                <h2 class="text-4xl lg:text-5xl font-display font-bold">Consultation & Demo Gratis</h2>
-                <p class="text-xl text-blue-100 opacity-80">Siap mengubah gedung Anda menjadi lebih cerdas? Hubungi ahli kami sekarang.</p>
+            <div class="relative z-10 text-white space-y-6 text-center lg:text-left">
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-black leading-tight">Consultation & <br>Demo Gratis</h2>
+                <p class="text-xl text-blue-100/80 max-w-lg mx-auto lg:mx-0">Transform your building management today. Our experts are ready to show you the power of intelligent solutions.</p>
             </div>
             
-            <div class="relative z-10 text-center lg:text-right space-y-6">
-                <a href="#" class="bg-white text-royal-blue hover:bg-blue-50 px-12 py-5 rounded-full font-bold text-xl transition-all shadow-2xl inline-block">
+            <div class="relative z-10 text-center lg:text-right space-y-8 w-full lg:w-auto">
+                <a href="#" class="w-full sm:w-auto bg-white text-royal-blue hover:bg-blue-50 px-14 py-6 rounded-full font-black text-xl transition-all shadow-3xl inline-flex items-center justify-center transform hover:scale-105 active:scale-95">
                     Hubungi Kami
                 </a>
-                <div class="flex items-center justify-center lg:justify-end space-x-3 text-white">
-                    <i class="fa-brands fa-whatsapp text-2xl"></i>
-                    <a href="#" class="hover:underline font-medium">+62 812-3456-7890 (WhatsApp)</a>
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-end gap-4 text-white">
+                    <div class="flex items-center space-x-3 bg-white/10 px-5 py-2 rounded-full backdrop-blur-md">
+                        <i class="fa-brands fa-whatsapp text-2xl text-green-400"></i>
+                        <a href="#" class="hover:underline font-bold tracking-tight">+62 812-3456-7890</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-midnight pt-24 pb-12 text-gray-400">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
-            <div class="space-y-8">
-                <a href="#" class="flex items-center space-x-2">
-                    <div class="w-10 h-10 bg-royal-blue rounded-lg flex items-center justify-center text-white font-bold text-xl">B</div>
-                    <span class="text-white font-display font-bold text-2xl tracking-tighter">BMS</span>
+    <footer class="bg-midnight pt-32 pb-16 text-gray-400 border-t border-gray-900/50">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-4 gap-20 mb-24">
+            <div class="space-y-10">
+                <a href="#" class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-royal-blue rounded-xl flex items-center justify-center text-white font-bold text-2xl shadow-lg shadow-blue-600/30">B</div>
+                    <span class="text-white font-display font-bold text-3xl tracking-tighter">BMS</span>
                 </a>
-                <p class="leading-relaxed">Pemimpin dalam solusi Building Management System cerdas. Kami membantu mengoptimalkan efisiensi dan kenyamanan fasilitas Anda dengan teknologi terkini.</p>
-                <div class="flex space-x-4">
-                    <a href="#" class="w-10 h-10 rounded-full border border-gray-800 flex items-center justify-center hover:bg-royal-blue hover:text-white transition-all"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a href="#" class="w-10 h-10 rounded-full border border-gray-800 flex items-center justify-center hover:bg-royal-blue hover:text-white transition-all"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="w-10 h-10 rounded-full border border-gray-800 flex items-center justify-center hover:bg-royal-blue hover:text-white transition-all"><i class="fa-brands fa-twitter"></i></a>
+                <p class="leading-relaxed text-lg font-light">Elevating building management through advanced intelligence. We empower facility managers with the tools they need to achieve sustainable growth.</p>
+                <div class="flex space-x-5">
+                    <a href="#" class="w-12 h-12 rounded-2xl border border-gray-800 flex items-center justify-center hover:bg-royal-blue hover:text-white transition-all transform hover:-translate-y-2"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-2xl border border-gray-800 flex items-center justify-center hover:bg-royal-blue hover:text-white transition-all transform hover:-translate-y-2"><i class="fa-brands fa-instagram text-xl"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-2xl border border-gray-800 flex items-center justify-center hover:bg-royal-blue hover:text-white transition-all transform hover:-translate-y-2"><i class="fa-brands fa-x-twitter text-xl"></i></a>
                 </div>
             </div>
 
             <div>
-                <h4 class="text-white font-bold text-lg mb-8 uppercase tracking-widest">Solutions</h4>
-                <ul class="space-y-4">
-                    <li><a href="#" class="hover:text-white transition-colors">Energy Management</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">HVAC Control</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Smart Lighting</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Security Systems</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Fire Protection</a></li>
+                <h4 class="text-white font-black text-sm mb-10 uppercase tracking-[0.3em]">Solutions</h4>
+                <ul class="space-y-5">
+                    <li><a href="#" class="hover:text-royal-blue transition-colors flex items-center group"><span class="w-2 h-2 bg-gray-800 rounded-full mr-3 group-hover:bg-royal-blue"></span>Energy Management</a></li>
+                    <li><a href="#" class="hover:text-royal-blue transition-colors flex items-center group"><span class="w-2 h-2 bg-gray-800 rounded-full mr-3 group-hover:bg-royal-blue"></span>HVAC Control</a></li>
+                    <li><a href="#" class="hover:text-royal-blue transition-colors flex items-center group"><span class="w-2 h-2 bg-gray-800 rounded-full mr-3 group-hover:bg-royal-blue"></span>Smart Lighting</a></li>
+                    <li><a href="#" class="hover:text-royal-blue transition-colors flex items-center group"><span class="w-2 h-2 bg-gray-800 rounded-full mr-3 group-hover:bg-royal-blue"></span>Security Systems</a></li>
+                    <li><a href="#" class="hover:text-royal-blue transition-colors flex items-center group"><span class="w-2 h-2 bg-gray-800 rounded-full mr-3 group-hover:bg-royal-blue"></span>Fire Protection</a></li>
                 </ul>
             </div>
 
             <div>
-                <h4 class="text-white font-bold text-lg mb-8 uppercase tracking-widest">Company</h4>
-                <ul class="space-y-4">
-                    <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">News & Press</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Sustainability</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                <h4 class="text-white font-black text-sm mb-10 uppercase tracking-[0.3em]">Quick Links</h4>
+                <ul class="space-y-5">
+                    <li><a href="#" class="hover:text-royal-blue transition-colors flex items-center group"><span class="w-2 h-2 bg-gray-800 rounded-full mr-3 group-hover:bg-royal-blue"></span>About Us</a></li>
+                    <li><a href="#" class="hover:text-royal-blue transition-colors flex items-center group"><span class="w-2 h-2 bg-gray-800 rounded-full mr-3 group-hover:bg-royal-blue"></span>Technology</a></li>
+                    <li><a href="#" class="hover:text-royal-blue transition-colors flex items-center group"><span class="w-2 h-2 bg-gray-800 rounded-full mr-3 group-hover:bg-royal-blue"></span>Case Studies</a></li>
+                    <li><a href="#" class="hover:text-royal-blue transition-colors flex items-center group"><span class="w-2 h-2 bg-gray-800 rounded-full mr-3 group-hover:bg-royal-blue"></span>Careers</a></li>
+                    <li><a href="#" class="hover:text-royal-blue transition-colors flex items-center group"><span class="w-2 h-2 bg-gray-800 rounded-full mr-3 group-hover:bg-royal-blue"></span>Contact</a></li>
                 </ul>
             </div>
 
             <div>
-                <h4 class="text-white font-bold text-lg mb-8 uppercase tracking-widest">Contact Info</h4>
-                <ul class="space-y-4">
-                    <li class="flex items-start space-x-3">
-                        <i class="fa-solid fa-location-dot mt-1.5 text-royal-blue"></i>
-                        <span>Jl. Sudirman No. 123, Jakarta Selatan, 12190</span>
+                <h4 class="text-white font-black text-sm mb-10 uppercase tracking-[0.3em]">Reach Us</h4>
+                <ul class="space-y-6">
+                    <li class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-xl bg-gray-900 flex items-center justify-center text-royal-blue flex-shrink-0"><i class="fa-solid fa-location-dot"></i></div>
+                        <span class="text-gray-300">Jl. Sudirman No. 123, Jakarta Selatan, 12190</span>
                     </li>
-                    <li class="flex items-center space-x-3">
-                        <i class="fa-solid fa-phone text-royal-blue"></i>
-                        <span>+62 21-1234-5678</span>
+                    <li class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-xl bg-gray-900 flex items-center justify-center text-royal-blue flex-shrink-0"><i class="fa-solid fa-phone"></i></div>
+                        <span class="text-gray-300">+62 21-1234-5678</span>
                     </li>
-                    <li class="flex items-center space-x-3">
-                        <i class="fa-solid fa-envelope text-royal-blue"></i>
-                        <span>info@bms-intelligence.id</span>
+                    <li class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded-xl bg-gray-900 flex items-center justify-center text-royal-blue flex-shrink-0"><i class="fa-solid fa-envelope"></i></div>
+                        <span class="text-gray-300">info@bms-intelligence.id</span>
                     </li>
                 </ul>
             </div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-6 pt-12 border-t border-gray-900 text-center text-sm">
-            <p>&copy; 2026 BMS Smart Building Intelligent Solution. All Rights Reserved.</p>
+        <div class="max-w-7xl mx-auto px-6 pt-16 border-t border-gray-900/50 text-center flex flex-col md:flex-row items-center justify-between gap-6">
+            <p class="text-sm font-medium">&copy; 2026 BMS Smart Building Intelligent Solution. All Rights Reserved.</p>
+            <div class="flex space-x-8 text-xs font-bold uppercase tracking-widest">
+                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                <a href="#" class="hover:text-white transition-colors">Cookie Policy</a>
+            </div>
         </div>
     </footer>
 
     <!-- Floating WhatsApp Button -->
-    <a href="#" class="fixed bottom-8 right-8 w-16 h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center text-3xl shadow-2xl hover:scale-110 transition-transform z-50">
-        <i class="fa-brands fa-whatsapp"></i>
+    <a href="#" class="fixed bottom-10 right-10 w-20 h-20 bg-[#25D366] text-white rounded-[28px] flex items-center justify-center text-4xl shadow-3xl hover:scale-110 active:scale-95 transition-all z-50 group">
+        <i class="fa-brands fa-whatsapp group-hover:rotate-12 transition-transform"></i>
+        <span class="absolute right-full mr-4 bg-white text-navy px-4 py-2 rounded-xl text-sm font-bold opacity-0 group-hover:opacity-100 transition-all shadow-xl pointer-events-none whitespace-nowrap">Chat with us</span>
     </a>
 
 </body>
