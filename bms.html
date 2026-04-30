@@ -140,11 +140,12 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen bg-midnight pt-32 pb-44 flex items-center overflow-hidden">
+    <section id="home" class="relative min-h-screen bg-midnight pt-32 pb-12 flex flex-col overflow-hidden">
         <div class="absolute inset-0 hero-gradient"></div>
         <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
         
-        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+        <div class="max-w-7xl mx-auto px-6 flex-grow flex items-center relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center w-full py-12">
             <div class="space-y-12 text-center lg:text-left" data-aos="fade-right">
                 <div class="inline-flex items-center space-x-3 bg-blue-900/20 border border-blue-500/20 px-5 py-2.5 rounded-full">
                     <span class="w-2.5 h-2.5 bg-brand-accent rounded-full animate-pulse shadow-[0_0_10px_#00d9ff]"></span>
@@ -188,10 +189,13 @@
                 </div>
             </div>
         </div>
+                </div>
+            </div>
+        </div>
 
-        <!-- Quick Info Bar -->
-        <div class="absolute bottom-12 left-0 right-0 mx-auto w-full max-w-6xl px-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="glass p-8 md:p-10 rounded-[32px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 border-white/5">
+        <!-- Quick Info Bar (Inside Hero Flow) -->
+        <div class="max-w-7xl mx-auto px-6 w-full relative z-10" data-aos="fade-up" data-aos-delay="400">
+            <div class="glass p-8 md:p-12 rounded-[32px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 border-white/5 shadow-2xl">
                 <div class="flex items-center space-x-6 text-white group cursor-default">
                     <div class="w-16 h-16 rounded-2xl bg-royal-blue/10 flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all shadow-inner border border-white/5">
                         <i class="fa-solid fa-microchip text-2xl"></i>
