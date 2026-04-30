@@ -7,7 +7,7 @@
     <title>PT Surya Sarana Dinamika - Smart Building Intelligence</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@200;300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
 
         * {
             margin: 0;
@@ -26,7 +26,7 @@
             --color-text-primary: #0f172a;
             --color-text-secondary: #475569;
             --color-text-tertiary: #64748b;
-            --blur: 20px;
+            --blur: 10px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -62,19 +62,21 @@
             top: -10%;
             left: -5%;
             animation: aurora-float 15s ease-in-out infinite;
-            filter: blur(60px);
+            filter: blur(40px);
+            will-change: transform;
         }
 
         .aurora-2 {
             position: absolute;
             width: 500px;
             height: 500px;
-            background: radial-gradient(ellipse at 70% 40%, rgba(255, 0, 110, 0.15) 0%, transparent 70%);
+            background: radial-gradient(ellipse at 70% 40%, rgba(255, 51, 0, 0.15) 0%, transparent 70%);
             border-radius: 50%;
             top: 5%;
             right: 5%;
             animation: aurora-float 18s ease-in-out infinite reverse;
-            filter: blur(50px);
+            filter: blur(40px);
+            will-change: transform;
         }
 
         .aurora-3 {
@@ -86,7 +88,8 @@
             bottom: -10%;
             right: 10%;
             animation: aurora-float 20s ease-in-out infinite;
-            filter: blur(80px);
+            filter: blur(50px);
+            will-change: transform;
         }
 
         .aurora-4 {
@@ -98,7 +101,8 @@
             bottom: 5%;
             left: 10%;
             animation: aurora-float 17s ease-in-out infinite reverse;
-            filter: blur(70px);
+            filter: blur(50px);
+            will-change: transform;
         }
 
         @keyframes aurora-float {
@@ -147,10 +151,15 @@
             left: 0;
             right: 0;
             z-index: 100;
-            backdrop-filter: blur(10px);
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.7) 100%);
             border-bottom: 1px solid var(--color-glass-border);
             animation: slideDown 0.6s ease-out;
+            transition: background 0.3s ease;
+        }
+
+        header.scrolled {
+            backdrop-filter: blur(10px);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.85) 100%);
         }
 
         @keyframes slideDown {
@@ -791,7 +800,7 @@
         }
 
         .product-card:hover {
-            border-color: var(--color-primary));
+            border-color: var(--color-primary);
             border-left-color: var(--color-primary);
             background: linear-gradient(120deg, rgba(0, 217, 255, 0.08), rgba(255, 190, 11, 0.08));
             transform: translateY(-8px);
@@ -1210,7 +1219,7 @@
         <section class="hero" id="beranda">
             <div class="hero-content">
                 <div class="hero-badge">
-                    <i class="fas fa-sparkles"></i> Smart Building Intelligence
+                    <i class="fa-regular fa-star"></i> Smart Building Intelligence
                 </div>
                 <h1>Gedung Cerdas, <span class="gradient-text">Efisiensi Maksimal</span></h1>
                 <p>Revolusionalisasi operasi gedung Anda dengan Building Management System terdepan. Real-time
@@ -1218,11 +1227,11 @@
                 <div class="hero-buttons">
                     <button class="btn btn-primary"
                         onclick="document.getElementById('kontak').scrollIntoView({behavior:'smooth'})">
-                        <i class="fas fa-arrow-right"></i> Minta Demo Sekarang
+                        <i class="fa-regular fa-circle-right"></i> Minta Demo Sekarang
                     </button>
                     <button class="btn btn-secondary"
                         onclick="document.getElementById('solusi').scrollIntoView({behavior:'smooth'})">
-                        <i class="fas fa-play"></i> Lihat Solusi Kami
+                        <i class="fa-regular fa-circle-play"></i> Lihat Solusi Kami
                     </button>
                 </div>
             </div>
@@ -1251,24 +1260,24 @@
 
                 <div class="values-grid">
                     <div class="value-item">
-                        <div class="value-icon"><i class="fa-solid fa-handshake"></i></div>
+                        <div class="value-icon"><i class="fa-regular fa-handshake"></i></div>
                         <h3>Integritas</h3>
                         <p>Fondasi kepercayaan dengan kejujuran, transparansi, dan akuntabilitas dalam setiap interaksi.
                         </p>
                     </div>
                     <div class="value-item">
-                        <div class="value-icon"><i class="fa-solid fa-users-gear"></i></div>
+                        <div class="value-icon"><i class="fa-regular fa-address-book"></i></div>
                         <h3>Respect</h3>
                         <p>Mengakui nilai setiap individu dengan kesopanan dan pertimbangan dalam melayani stakeholder.
                         </p>
                     </div>
                     <div class="value-item">
-                        <div class="value-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
+                        <div class="value-icon"><i class="fa-regular fa-lightbulb"></i></div>
                         <h3>Responsive</h3>
                         <p>Bereaksi cepat dan positif terhadap kebutuhan klien dengan komitmen melampaui ekspektasi.</p>
                     </div>
                     <div class="value-item">
-                        <div class="value-icon"><i class="fa-solid fa-medal"></i></div>
+                        <div class="value-icon"><i class="fa-regular fa-star"></i></div>
                         <h3>Excellent</h3>
                         <p>Berusaha mencapai standar tertinggi dengan komitmen perbaikan berkelanjutan dan performa luar
                             biasa.</p>
@@ -1298,22 +1307,22 @@
 
             <div class="features-grid">
                 <div class="feature-item">
-                    <div class="feature-icon"><i class="fa-solid fa-microchip"></i></div>
+                    <div class="feature-icon"><i class="fa-regular fa-id-card"></i></div>
                     <h3>Sensor</h3>
                     <p>Perangkat yang mengukur suhu, kelembapan, okupansi, cahaya, kualitas udara, dan tekanan</p>
                 </div>
                 <div class="feature-item">
-                    <div class="feature-icon"><i class="fa-solid fa-sliders"></i></div>
+                    <div class="feature-icon"><i class="fa-regular fa-compass"></i></div>
                     <h3>Kontroler</h3>
                     <p>Hardware dan software yang memproses data sensor dengan protokol komunikasi multivarian</p>
                 </div>
                 <div class="feature-item">
-                    <div class="feature-icon"><i class="fa-solid fa-gears"></i></div>
+                    <div class="feature-icon"><i class="fa-regular fa-sun"></i></div>
                     <h3>Aktuator</h3>
                     <p>Perangkat yang melaksanakan perintah dari kontroler untuk menjalankan aksi sistem</p>
                 </div>
                 <div class="feature-item">
-                    <div class="feature-icon"><i class="fa-solid fa-desktop"></i></div>
+                    <div class="feature-icon"><i class="fa-regular fa-window-maximize"></i></div>
                     <h3>User Interface</h3>
                     <p>Aplikasi software untuk monitoring kinerja dengan dashboard, laporan, dan alarm</p>
                 </div>
@@ -1323,32 +1332,32 @@
 
             <div class="features-grid">
                 <div class="feature-item">
-                    <div class="feature-icon"><i class="fa-solid fa-building-shield"></i></div>
+                    <div class="feature-icon"><i class="fa-regular fa-building"></i></div>
                     <h3>Keandalan Tinggi</h3>
                     <p>Peningkatan keandalan peralatan melalui monitoring proaktif</p>
                 </div>
                 <div class="feature-item">
-                    <div class="feature-icon"><i class="fa-solid fa-money-bill-trend-up"></i></div>
+                    <div class="feature-icon"><i class="fa-regular fa-money-bill-1"></i></div>
                     <h3>Biaya Operasional</h3>
                     <p>Penurangan signifikan dalam biaya operasional gedung</p>
                 </div>
                 <div class="feature-item">
-                    <div class="feature-icon"><i class="fa-solid fa-city"></i></div>
+                    <div class="feature-icon"><i class="fa-regular fa-map"></i></div>
                     <h3>Manajemen Optimal</h3>
                     <p>Pengelolaan gedung yang lebih efisien dan terpusat</p>
                 </div>
                 <div class="feature-item">
-                    <div class="feature-icon"><i class="fa-solid fa-user-tie"></i></div>
+                    <div class="feature-icon"><i class="fa-regular fa-user"></i></div>
                     <h3>Produktivitas</h3>
                     <p>Peningkatan produktivitas staf melalui lingkungan kerja optimal</p>
                 </div>
                 <div class="feature-item">
-                    <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="feature-icon"><i class="fa-regular fa-shield"></i></div>
                     <h3>Perlindungan Aset</h3>
                     <p>Perlindungan peralatan dan keselamatan penghuni</p>
                 </div>
                 <div class="feature-item">
-                    <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <div class="feature-icon"><i class="fa-regular fa-chart-bar"></i></div>
                     <h3>Efisiensi Energi</h3>
                     <p>Penghematan energi hingga 30% melalui otomasi cerdas</p>
                 </div>
@@ -1367,14 +1376,14 @@
                 <div class="solution-card glass-card">
                     <div class="solution-card-content">
                         <div class="solution-header">
-                            <div class="solution-icon"><i class="fa-solid fa-building-user"></i></div>
+                            <div class="solution-icon"><i class="fa-regular fa-building"></i></div>
                         </div>
                         <div class="solution-body">
                             <h3>Smart Building Package</h3>
                             <p>Solusi komprehensif yang menggabungkan berbagai sistem otomasi dan monitoring dalam satu
                                 platform terintegrasi untuk efisiensi operasional, kenyamanan penghuni, dan keamanan
                                 gedung.</p>
-                            <a href="#" class="solution-link"><i class="fas fa-arrow-right"></i> Pelajari Lebih
+                            <a href="#" class="solution-link"><i class="fa-regular fa-circle-right"></i> Pelajari Lebih
                                 Lanjut</a>
                         </div>
                     </div>
@@ -1383,14 +1392,14 @@
                 <div class="solution-card glass-card">
                     <div class="solution-card-content">
                         <div class="solution-header">
-                            <div class="solution-icon"><i class="fa-solid fa-battery-full"></i></div>
+                            <div class="solution-icon"><i class="fa-regular fa-clock"></i></div>
                         </div>
                         <div class="solution-body">
                             <h3>Energy Monitoring System</h3>
                             <p>Solusi pemantauan energi real-time untuk transparansi konsumsi daya. Mencatat data
                                 listrik dari berbagai titik dan mengidentifikasi potensi pemborosan energi dengan
                                 insight akurat.</p>
-                            <a href="#" class="solution-link"><i class="fas fa-arrow-right"></i> Pelajari Lebih
+                            <a href="#" class="solution-link"><i class="fa-regular fa-circle-right"></i> Pelajari Lebih
                                 Lanjut</a>
                         </div>
                     </div>
@@ -1399,14 +1408,14 @@
                 <div class="solution-card glass-card">
                     <div class="solution-card-content">
                         <div class="solution-header">
-                            <div class="solution-icon"><i class="fa-solid fa-wind"></i></div>
+                            <div class="solution-icon"><i class="fa-regular fa-snowflake"></i></div>
                         </div>
                         <div class="solution-body">
                             <h3>HVAC Automation System</h3>
                             <p>Sistem otomasi HVAC cerdas yang mengoptimalkan pendinginan dan ventilasi. HVAC
                                 mengkonsumsi 50% energi gedung, sistem kami menurunkan hingga 30% dengan kenyamanan
                                 maksimal.</p>
-                            <a href="#" class="solution-link"><i class="fas fa-arrow-right"></i> Pelajari Lebih
+                            <a href="#" class="solution-link"><i class="fa-regular fa-circle-right"></i> Pelajari Lebih
                                 Lanjut</a>
                         </div>
                     </div>
@@ -1415,13 +1424,13 @@
                 <div class="solution-card glass-card">
                     <div class="solution-card-content">
                         <div class="solution-header">
-                            <div class="solution-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                            <div class="solution-icon"><i class="fa-regular fa-lightbulb"></i></div>
                         </div>
                         <div class="solution-body">
                             <h3>Lighting Control & Monitoring</h3>
                             <p>Sistem kontrol pencahayaan otomatis berdasarkan occupancy, jadwal, dan cahaya alami.
                                 Meningkatkan efisiensi energi dan kenyamanan penghuni dengan responsif.</p>
-                            <a href="#" class="solution-link"><i class="fas fa-arrow-right"></i> Pelajari Lebih
+                            <a href="#" class="solution-link"><i class="fa-regular fa-circle-right"></i> Pelajari Lebih
                                 Lanjut</a>
                         </div>
                     </div>
@@ -1430,13 +1439,13 @@
                 <div class="solution-card glass-card">
                     <div class="solution-card-content">
                         <div class="solution-header">
-                            <div class="solution-icon"><i class="fa-solid fa-lock"></i></div>
+                            <div class="solution-icon"><i class="fa-regular fa-eye"></i></div>
                         </div>
                         <div class="solution-body">
                             <h3>Security & Access Control</h3>
                             <p>Sistem keamanan terintegrasi dengan CCTV, access control, dan surveillance canggih.
                                 Memastikan keselamatan dan keamanan optimal untuk semua pengguna gedung.</p>
-                            <a href="#" class="solution-link"><i class="fas fa-arrow-right"></i> Pelajari Lebih
+                            <a href="#" class="solution-link"><i class="fa-regular fa-circle-right"></i> Pelajari Lebih
                                 Lanjut</a>
                         </div>
                     </div>
@@ -1445,14 +1454,14 @@
                 <div class="solution-card glass-card">
                     <div class="solution-card-content">
                         <div class="solution-header">
-                            <div class="solution-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                            <div class="solution-icon"><i class="fa-regular fa-clipboard"></i></div>
                         </div>
                         <div class="solution-body">
                             <h3>Predictive Maintenance System</h3>
                             <p>Sistem pemeliharaan prediktif berbasis IoT yang mengidentifikasi potensi kerusakan
                                 sebelum terjadi. Mengurangi downtime dan mengoptimalkan biaya perawatan jangka panjang.
                             </p>
-                            <a href="#" class="solution-link"><i class="fas fa-arrow-right"></i> Pelajari Lebih
+                            <a href="#" class="solution-link"><i class="fa-regular fa-circle-right"></i> Pelajari Lebih
                                 Lanjut</a>
                         </div>
                     </div>
@@ -1470,7 +1479,7 @@
 
             <div class="services-grid">
                 <div class="service-item">
-                    <div class="service-icon"><i class="fa-solid fa-bullseye"></i></div>
+                    <div class="service-icon"><i class="fa-regular fa-circle-check"></i></div>
                     <h3>Expertise</h3>
                     <ul>
                         <li>20+ tahun pengalaman industri BMS</li>
@@ -1480,7 +1489,7 @@
                 </div>
 
                 <div class="service-item">
-                    <div class="service-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
+                    <div class="service-icon"><i class="fa-regular fa-gem"></i></div>
                     <h3>Customized Solutions</h3>
                     <ul>
                         <li>Solusi disesuaikan kebutuhan unik</li>
@@ -1490,7 +1499,7 @@
                 </div>
 
                 <div class="service-item">
-                    <div class="service-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+                    <div class="service-icon"><i class="fa-regular fa-file-lines"></i></div>
                     <h3>Proven Track Record</h3>
                     <ul>
                         <li>Portfolio proyek sukses</li>
@@ -1500,7 +1509,7 @@
                 </div>
 
                 <div class="service-item">
-                    <div class="service-icon"><i class="fa-solid fa-headset"></i></div>
+                    <div class="service-icon"><i class="fa-regular fa-comments"></i></div>
                     <h3>Support & Service</h3>
                     <ul>
                         <li>Dukungan 24/7 teknis</li>
@@ -1510,7 +1519,7 @@
                 </div>
 
                 <div class="service-item">
-                    <div class="service-icon"><i class="fa-solid fa-leaf"></i></div>
+                    <div class="service-icon"><i class="fa-regular fa-heart"></i></div>
                     <h3>Sustainability Focus</h3>
                     <ul>
                         <li>Solusi ramah lingkungan</li>
@@ -1520,7 +1529,7 @@
                 </div>
 
                 <div class="service-item">
-                    <div class="service-icon"><i class="fa-solid fa-industry"></i></div>
+                    <div class="service-icon"><i class="fa-regular fa-handshake"></i></div>
                     <h3>Industry Partnership</h3>
                     <ul>
                         <li>Johnson Controls</li>
@@ -1541,7 +1550,7 @@
 
             <div class="services-grid">
                 <div class="service-item">
-                    <div class="service-icon"><i class="fa-solid fa-file-signature"></i></div>
+                    <div class="service-icon"><i class="fa-regular fa-file-lines"></i></div>
                     <h3>Konsultasi & Desain</h3>
                     <ul>
                         <li>Analisis kebutuhan detail</li>
@@ -1551,7 +1560,7 @@
                 </div>
 
                 <div class="service-item">
-                    <div class="service-icon"><i class="fa-solid fa-tools"></i></div>
+                    <div class="service-icon"><i class="fa-regular fa-paper-plane"></i></div>
                     <h3>Instalasi & Implementasi</h3>
                     <ul>
                         <li>Instalasi hardware profesional</li>
@@ -1561,7 +1570,7 @@
                 </div>
 
                 <div class="service-item">
-                    <div class="service-icon"><i class="fa-solid fa-vial-circle-check"></i></div>
+                    <div class="service-icon"><i class="fa-regular fa-circle-check"></i></div>
                     <h3>Testing & Commissioning</h3>
                     <ul>
                         <li>Pengujian sistem komprehensif</li>
@@ -1571,7 +1580,7 @@
                 </div>
 
                 <div class="service-item">
-                    <div class="service-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                    <div class="service-icon"><i class="fa-regular fa-life-ring"></i></div>
                     <h3>Maintenance & Support</h3>
                     <ul>
                         <li>Maintenance rutin terjadwal</li>
@@ -1581,7 +1590,7 @@
                 </div>
 
                 <div class="service-item">
-                    <div class="service-icon"><i class="fa-solid fa-box-open"></i></div>
+                    <div class="service-icon"><i class="fa-regular fa-square-plus"></i></div>
                     <h3>Provision of Components</h3>
                     <ul>
                         <li>Spare parts berkualitas</li>
@@ -1591,7 +1600,7 @@
                 </div>
 
                 <div class="service-item">
-                    <div class="service-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                    <div class="service-icon"><i class="fa-regular fa-chart-bar"></i></div>
                     <h3>Monitoring & Optimization</h3>
                     <ul>
                         <li>Monitoring real-time</li>
@@ -1682,7 +1691,7 @@
             <p>Dapatkan konsultasi gratis dari tim ahli kami dan lihat bagaimana BMS dapat menghemat biaya operasional
                 Anda hingga 30%.</p>
             <button class="cta-btn" onclick="document.getElementById('kontak').scrollIntoView({behavior:'smooth'})">
-                <i class="fas fa-phone"></i> Hubungi Tim Kami Sekarang
+                <i class="fa-regular fa-comment-dots"></i> Hubungi Tim Kami Sekarang
             </button>
         </div>
 
@@ -1723,13 +1732,13 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem; font-size: 1rem;">
-                        <i class="fas fa-paper-plane"></i> Kirim Pesan
+                        <i class="fa-regular fa-paper-plane"></i> Kirim Pesan
                     </button>
                 </form>
 
                 <div class="contact-info">
                     <div class="contact-item">
-                        <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="contact-item-icon"><i class="fa-regular fa-map"></i></div>
                         <div class="contact-item-text">
                             <h3>Head Office - Jakarta</h3>
                             <p>Perdambatan Mega Sunter B-40</p>
@@ -1738,7 +1747,7 @@
                     </div>
 
                     <div class="contact-item">
-                        <div class="contact-item-icon"><i class="fas fa-phone"></i></div>
+                        <div class="contact-item-icon"><i class="fa-regular fa-comment-dots"></i></div>
                         <div class="contact-item-text">
                             <h3>Telepon</h3>
                             <p>(+62-21) 6583 5077 - 78</p>
@@ -1747,7 +1756,7 @@
                     </div>
 
                     <div class="contact-item">
-                        <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-item-icon"><i class="fa-regular fa-envelope"></i></div>
                         <div class="contact-item-text">
                             <h3>Email</h3>
                             <p>sales@suryasarana.com</p>
@@ -1756,7 +1765,7 @@
                     </div>
 
                     <div class="contact-item">
-                        <div class="contact-item-icon"><i class="fas fa-clock"></i></div>
+                        <div class="contact-item-icon"><i class="fa-regular fa-clock"></i></div>
                         <div class="contact-item-text">
                             <h3>Jam Operasional</h3>
                             <p>Senin - Jumat: 08:00 - 17:00</p>
@@ -1774,7 +1783,7 @@
                     </div>
 
                     <div class="contact-item">
-                        <div class="contact-item-icon"><i class="fas fa-location-dot"></i></div>
+                        <div class="contact-item-icon"><i class="fa-regular fa-map"></i></div>
                         <div class="contact-item-text">
                             <h3>Lokasi Lain</h3>
                             <p><strong>Surabaya:</strong> Jl. Jemur Andayani 36B</p>
@@ -1933,14 +1942,19 @@ ${message}
         });
 
         // Navbar background on scroll
+        let lastScrollY = window.scrollY;
+        const header = document.querySelector('header');
+        
         window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
+            if (Math.abs(window.scrollY - lastScrollY) < 10) return;
+            
             if (window.scrollY > 50) {
-                header.style.background = 'linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.85) 100%)';
+                header.classList.add('scrolled');
             } else {
-                header.style.background = 'linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.7) 100%)';
+                header.classList.remove('scrolled');
             }
-        });
+            lastScrollY = window.scrollY;
+        }, { passive: true });
     </script>
 </body>
 
